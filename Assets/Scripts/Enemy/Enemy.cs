@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour, IDamageable
                 {
                     var randL = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
                     dingding = Instantiate(droppings, transform.position + randL, transform.rotation);
+                    var randF = new Vector2(Random.Range(-25f,25f), Random.Range(-25f,25f));
+                    dingding.GetComponent<Rigidbody2D>().AddForce(randF);
                 }
                 count++;
             }
-            var randForce = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+            var randForce = new Vector2(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f));
             rb.AddForce(randForce);
             Destroy(gameObject, 3f);
         }
