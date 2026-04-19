@@ -53,4 +53,8 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    public void SetAttackSpeed(float speed)
+    {
+        atkDuration = 1/speed;
+    }
 }

@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float health;
     [SerializeField] private float maxHealth = 30f;
 
-    [SerializeField] private GameObject droppings;
+    [SerializeField] private GameObject[] droppings;
     [SerializeField] private int numDrops;
     private GameObject dingding;
     private int count = 0;
@@ -28,9 +28,10 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 for (int i = 0; i < numDrops; i++)
                 {
+                    int randD = Random.Range(0, droppings.Length - 1);
                     var randL = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
-                    dingding = Instantiate(droppings, transform.position + randL, transform.rotation);
-                    var randF = new Vector2(Random.Range(-25f,25f), Random.Range(-25f,25f));
+                    dingding = Instantiate(droppings[randD], transform.position + randL, transform.rotation);
+                    var randF = new Vector2(Random.Range(-5f,5f), Random.Range(-5f,5f));
                     dingding.GetComponent<Rigidbody2D>().AddForce(randF);
                 }
                 count++;

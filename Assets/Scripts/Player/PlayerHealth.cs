@@ -40,4 +40,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         health += heal;
         health = Mathf.Clamp(health, 0, maxHealth);
     }
+    public void SetMaxHealth(float maxHealth)
+    {
+        health += maxHealth - this.maxHealth;
+        this.maxHealth = maxHealth;
+        health = Mathf.Clamp(health, 0, maxHealth);
+    }
 }

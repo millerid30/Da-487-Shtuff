@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6971604946655021410
+--- !u!1001 &1467253846923609376
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.7924528
       objectReference: {fileID: 0}
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.g
-      value: 0.6569882
+      value: 0.13082945
       objectReference: {fileID: 0}
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.r
-      value: 0.1745283
+      value: 0.56797117
       objectReference: {fileID: 0}
     - target: {fileID: 1724227821939890786, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Pivot.x
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1724227821939890786, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1724227821939890786, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -102,23 +102,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5800036936729792958, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Name
-      value: Item Blue
+      value: Item Purple
       objectReference: {fileID: 0}
     - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 7a0f58b2de3cfb84894327d56bb56bd2, type: 2}
+      objectReference: {fileID: 11400000, guid: 4e9151e50926cd64f8e528d9bc65faeb, type: 2}
     - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: itemDescription
-      value: Blueberry orb. Increases attack speed.
+      value: Grape orb. Increases sauce.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.79215693
       objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.g
-      value: 0.65882355
+      value: 0.12941177
       objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.r
-      value: 0.1764706
+      value: 0.5686275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

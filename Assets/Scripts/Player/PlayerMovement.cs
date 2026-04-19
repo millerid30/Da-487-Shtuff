@@ -21,6 +21,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (PauseController.IsGamePaused)
+        //{
+        //    rb.linearVelocity = Vector2.zero;
+        //    return;
+        //}
+
         //rb.linearVelocity = (moveInput.normalized * moveSpeed);
         if (moveInput == Vector2.zero)
         {
@@ -43,5 +49,9 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
     }
 }

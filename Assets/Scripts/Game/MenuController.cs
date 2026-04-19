@@ -24,6 +24,11 @@ public class MenuController : MonoBehaviour
 
     void Menu(InputAction.CallbackContext context)
     {
+        if (!menuCanvas.activeSelf && PauseController.IsGamePaused)
+        {
+            return;
+        }
         menuCanvas.SetActive(!menuCanvas.activeSelf);
+        PauseController.SetPause(menuCanvas.activeSelf);
     }
 }

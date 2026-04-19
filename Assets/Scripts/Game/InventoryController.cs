@@ -12,7 +12,7 @@ public class InventoryController : MonoBehaviour
         for (int i = 0; i < slotCount; i++)
         {
             Slot slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<Slot>();
-            if(i < itemPrefabs.Length)
+            if (i < itemPrefabs.Length)
             {
                 GameObject item = Instantiate(itemPrefabs[i], slot.transform);
                 item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -23,8 +23,9 @@ public class InventoryController : MonoBehaviour
 
     public bool AddItem(GameObject itemPrefab)
     {
-        foreach(Transform slotTransform in inventoryPanel.transform)
+        foreach (Transform slotTransform in inventoryPanel.transform)
         {
+
             Slot slot = slotTransform.GetComponent<Slot>();
             if (slot != null && slot.currentItem == null)
             {
@@ -38,3 +39,10 @@ public class InventoryController : MonoBehaviour
         return false;
     }
 }
+public enum ItemType
+{
+    Equipment,
+    Weapon,
+    Consumable,
+    None
+};

@@ -15,4 +15,8 @@ public class Weapon : MonoBehaviour
             }
         }
     }
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
 }

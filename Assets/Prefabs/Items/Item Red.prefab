@@ -104,6 +104,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Red
       objectReference: {fileID: 0}
+    - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 195675556d104a14da89921c1ec7fe3d, type: 2}
+    - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
+      propertyPath: itemDescription
+      value: Cherry orb. Increases power.
+      objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.b
       value: 0.16470589

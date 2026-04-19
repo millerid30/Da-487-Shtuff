@@ -119,6 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
   ID: 0
+  item: {fileID: 11400000, guid: cfb367fd33e67a24e826ab745b086a94, type: 2}
+  itemDescription: Classic vanilla orb.
+  type: 2
 --- !u!212 &9001753713664804785
 SpriteRenderer:
   serializedVersion: 2
