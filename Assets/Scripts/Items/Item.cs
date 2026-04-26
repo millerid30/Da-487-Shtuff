@@ -8,3 +8,10 @@ public class Item : MonoBehaviour
     [SerializeField] private string itemDescription;
     public ItemType type;
 }
+public enum ItemType
+{
+    Equipment,
+    Weapon,
+    Consumable,
+    None
+};

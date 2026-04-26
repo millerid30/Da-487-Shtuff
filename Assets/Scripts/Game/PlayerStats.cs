@@ -30,7 +30,7 @@ public class PlayerStats : MonoBehaviour
             playerMovement.SetMoveSpeed(speed);
             damage.SetDamage(power);
             attack.SetAttackSpeed(atkSpeed);
-            //TODO sauce calculations
+            damage.SetSauce(sauce);
         }
         hpText.text = health.ToString("0.##");
         spdText.text = speed.ToString("0.##");

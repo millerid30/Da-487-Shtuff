@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private float damage = 10f;
+    private float damage;
+    private float sauce;
+    public WeaponSO weapon;
+    [TextArea]
+    [SerializeField] private string weaponDescription;
+    public WeaponType weaponType;
+    private GameObject prefab;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,12 +17,31 @@ public class Weapon : MonoBehaviour
             IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
             if(iDamageable != null)
             {
-                iDamageable.Damage(damage);
+                iDamageable.Damage(damage * weapon.powerMulti);
             }
+        }
+    }
+    public void SauceItUp()
+    {
+        prefab = Object.Instantiate(weapon.sauceProjectile, transform.position, transform.rotation);
+        Projectile newP = prefab.GetComponent<Projectile>();
+        if(newP != null)
+        {
+            newP.SetSauce(sauce);
+            newP.SetSauceMulti(weapon.sauceMulti);
         }
     }
     public void SetDamage(float damage)
     {
         this.damage = damage;
     }
+    public void SetSauce(float sauce)
+    {
+        this.sauce = sauce;
+    }
+    
 }
+public enum WeaponType
+{
+    Power, Sauce, Hybrid
+};

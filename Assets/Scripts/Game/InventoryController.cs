@@ -39,10 +39,3 @@ public class InventoryController : MonoBehaviour
         return false;
     }
 }
-public enum ItemType
-{
-    Equipment,
-    Weapon,
-    Consumable,
-    None
-};
