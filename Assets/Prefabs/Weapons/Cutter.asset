@@ -16,3 +16,4 @@ MonoBehaviour:
   powerMulti: 0.5
   atkSpeedMulti: 2
   sauceMulti: 1.2
+  sauceProjectile: {fileID: 0}

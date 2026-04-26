@@ -32,9 +32,8 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         MeleeTimer();
+        
     }
-
-
     void Attack(InputAction.CallbackContext context)
     {
         if (!isAttacking)

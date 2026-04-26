@@ -16,6 +16,8 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
     int nextWave = 0;
 
+    public Transform[] spawnPoints;
+
     [SerializeField] private float timeBetweenWaves = 5;
     private float waveCountdown;
 
@@ -101,10 +103,17 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning enemies...");
         // Spawn enemies weighted by threat level
-        foreach (GameObject e in enemies)
+        if (spawnPoints.Length == 0)
         {
-           prefab = Instantiate(e, transform.position, transform.rotation);
+            Debug.Log("No Spawn points");
+            GameObject randE = enemies[Random.Range(0, enemies.Length)];
+            prefab = Instantiate(randE, transform.position, transform.rotation);
+        }
+        else
+        {
+            Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            GameObject randE = enemies[Random.Range(0, enemies.Length)];
+            prefab = Instantiate(randE, spawn.position, spawn.rotation);
         }
     }
-
 }
