@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public GameObject[] Melee;
     private InputAction playerControls;
+    private PlayerStats playerStats;
     public bool isAttacking = false;
     [SerializeField] private float atkDuration = 0.3f;
     [SerializeField] private float atkTimer = 0f;
@@ -14,8 +15,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
+        playerStats = FindAnyObjectByType<PlayerStats>();
         foreach (GameObject m in Melee)
         {
+            SetDamageTypes();
             m.SetActive(false);
         }
     }
@@ -32,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         MeleeTimer();
-        
+
     }
     void Attack(InputAction.CallbackContext context)
     {
@@ -72,10 +75,8 @@ public class PlayerAttack : MonoBehaviour
         if (context.started)
         {
             select--;
-            if (select < 0)
-            {
-                select = Melee.Length - 1;
-            }
+            select = (select + Melee.Length) % Melee.Length;
+            SetDamageTypes();
         }
     }
     public void NextWeapon(InputAction.CallbackContext context)
@@ -83,10 +84,8 @@ public class PlayerAttack : MonoBehaviour
         if (context.started)
         {
             select++;
-            if (select >= Melee.Length)
-            {
-                select = 0;
-            }
+            select %= Melee.Length;
+            SetDamageTypes();
         }
     }
     public int GetSelectedWeapon()
@@ -96,5 +95,13 @@ public class PlayerAttack : MonoBehaviour
     public void SetAttackSpeed(float speed)
     {
         atkDuration = 1 / speed;
+    }
+    public void SetDamageTypes()
+    {
+        if (Melee[select].GetComponent<Weapon>() != null)
+        {
+            Melee[select].GetComponent<Weapon>().SetDamage(playerStats.power);
+            Melee[select].GetComponent<Weapon>().SetSauce(playerStats.sauce);
+        }
     }
 }

@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     public void SauceItUp()
     {
         prefab = Object.Instantiate(weapon.sauceProjectile, transform.position, transform.rotation);
-        Projectile newP = prefab.GetComponent<Projectile>();
+        Projectile newP = prefab.GetComponentInChildren<Projectile>();
         if(newP != null)
         {
             newP.SetSauce(sauce);

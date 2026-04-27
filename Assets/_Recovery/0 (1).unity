@@ -3891,67 +3891,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9093f9e2e1458d45ac2ab3272984767, type: 3}
---- !u!1001 &1185093095
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_Name
-      value: Pepperonipede
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.696198
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.6884176
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
 --- !u!1 &1198615516
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4533,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446819741}
   m_CullTransparentMesh: 1
+--- !u!1001 &1473495273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_Name
+      value: Pepperonipede
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.314404
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.58446056
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
 --- !u!1 &1503364451
 GameObject:
   m_ObjectHideFlags: 0
@@ -5670,7 +5666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   inventoryPanel: {fileID: 903793597}
   slotPrefab: {fileID: 3789165553690544092, guid: 4fab351853303774799925307ae0fb0d, type: 3}
-  slotCount: 999
+  slotCount: 320
   itemPrefabs: []
 --- !u!114 &1865782265
 MonoBehaviour:
@@ -5716,36 +5712,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
   waves:
   - name: Wave 1
-    WeightedEnemies:
-    - {fileID: 11400000, guid: d9652236fecbcbd40916565fdd79ce1e, type: 2}
-    - {fileID: 11400000, guid: c7f594ec1ccb0c0419fc18422c27e6d7, type: 2}
-    - {fileID: 11400000, guid: 81ceceb055a806541b609f44a0638d5b, type: 2}
-    count: 3
+    enemyPrefab:
+    - {fileID: 117279171865853566, guid: 1a2e000106516fe478251f975315ae90, type: 3}
+    - {fileID: 1031731082222593503, guid: c4d877117cad74d49ac9fa9a96dfc5e9, type: 3}
+    - {fileID: 7134664333846991566, guid: 0cb9d5cb270363f43b8411882373f6f3, type: 3}
+    count: 5
     points: 10
     rate: 1
   - name: Wave 2
-    WeightedEnemies:
-    - {fileID: 11400000, guid: d9652236fecbcbd40916565fdd79ce1e, type: 2}
-    - {fileID: 11400000, guid: c7f594ec1ccb0c0419fc18422c27e6d7, type: 2}
-    - {fileID: 11400000, guid: 81ceceb055a806541b609f44a0638d5b, type: 2}
-    count: 5
+    enemyPrefab:
+    - {fileID: 117279171865853566, guid: 1a2e000106516fe478251f975315ae90, type: 3}
+    - {fileID: 1031731082222593503, guid: c4d877117cad74d49ac9fa9a96dfc5e9, type: 3}
+    - {fileID: 7134664333846991566, guid: 0cb9d5cb270363f43b8411882373f6f3, type: 3}
+    count: 10
     points: 20
     rate: 1.5
   - name: Wave 3
-    WeightedEnemies:
-    - {fileID: 11400000, guid: d9652236fecbcbd40916565fdd79ce1e, type: 2}
-    - {fileID: 11400000, guid: c7f594ec1ccb0c0419fc18422c27e6d7, type: 2}
-    - {fileID: 11400000, guid: 81ceceb055a806541b609f44a0638d5b, type: 2}
-    count: 10
+    enemyPrefab:
+    - {fileID: 117279171865853566, guid: 1a2e000106516fe478251f975315ae90, type: 3}
+    - {fileID: 1031731082222593503, guid: c4d877117cad74d49ac9fa9a96dfc5e9, type: 3}
+    - {fileID: 7134664333846991566, guid: 0cb9d5cb270363f43b8411882373f6f3, type: 3}
+    count: 20
     points: 30
     rate: 2
-  - name: Boss Wave
-    WeightedEnemies:
-    - {fileID: 11400000, guid: 801c4bf940c35864583f7eb2d5e1e68b, type: 2}
-    count: 1
-    points: 100
-    rate: 1
-  Weights: []
   spawnPoints:
   - {fileID: 1571962737}
   - {fileID: 1551347653}
@@ -6783,4 +6772,4 @@ SceneRoots:
   - {fileID: 1551347653}
   - {fileID: 463863862}
   - {fileID: 1609258030}
-  - {fileID: 1185093095}
+  - {fileID: 1473495273}

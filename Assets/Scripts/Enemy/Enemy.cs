@@ -2,32 +2,33 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, IEnemyAttack3
 {
-    private Rigidbody2D rb;
+    protected private Rigidbody2D rb;
     public EnemySO enemy;
-    
+
     [Header("Health")]
-    [SerializeField] private float health;
+    [SerializeField] protected private float health;
 
     [Header("Distance")]
-    [SerializeField] private float maxDistance = 4f;
-    [SerializeField] private float minDistance = 2f;
-    [SerializeField] private float decisionDelay = 2f;
+    [SerializeField] protected private float maxDistance = 7f;
+    [SerializeField] protected private float minDistance = 2f;
+    [SerializeField] protected private float decisionDelay = 2f;
     float wanderTimer = 0f;
     bool isWandering = true;
 
     [Header("Silly")]
     [Range(0f, 200f)]
-    [SerializeField] private float sillyCoefficient = 50f;
+    [SerializeField] protected private float sillyCoefficient = 50f;
 
-    private Transform player;
-    private float distance;
-    private GameObject dingding;
+    protected private GameObject player;
+    private GameObject prefab;
+    protected private float distance;
     private bool isDead;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameObject.FindGameObjectWithTag("Player");
         isDead = false;
         health = enemy.maxHealth;
     }
@@ -35,10 +36,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(transform.position, player.transform.position);
         WanderTimer();
         if (player != null && health > 0)
         {
+            distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance <= maxDistance)
             {
                 Move();
@@ -126,9 +127,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
                 {
                     int randD = Random.Range(0, enemy.enemyDrops.Length);
                     var randL = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-                    dingding = Instantiate(enemy.enemyDrops[randD], transform.position + randL, transform.rotation);
+                    prefab = Instantiate(enemy.enemyDrops[randD], transform.position + randL, transform.rotation);
                     var randF = new Vector2(Random.Range(-1f, 1f * 10f), Random.Range(-1f, 1f)) * sillyCoefficient / 10f;
-                    dingding.GetComponent<Rigidbody2D>().AddForce(randF);
+                    prefab.GetComponent<Rigidbody2D>().AddForce(randF);
                 }
             }
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;

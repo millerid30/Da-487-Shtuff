@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -8,12 +9,14 @@ public class WaveSpawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public GameObject[] enemyPrefab;
+        //public GameObject[] enemyPrefab;
+        public List<WeightedSpawnSO> WeightedEnemies = new List<WeightedSpawnSO>();
         public int count;
         public int points;
         public float rate;
     }
     public Wave[] waves;
+    [SerializeField] private float[] Weights;
     int nextWave = 0;
 
     public Transform[] spawnPoints;
@@ -25,9 +28,17 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] private SpawnState state = SpawnState.counting;
     private GameObject prefab;
+    private void Awake()
+    {
+        Weights = new float[waves[nextWave].WeightedEnemies.Count];
+    }
 
     private void Start()
     {
+        if (spawnPoints.Length == 0)
+        {
+            Debug.Log("No Spawn points");
+        }
         waveCountdown = timeBetweenWaves;
     }
     private void Update()
@@ -88,10 +99,10 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning Wave: " + wave.name);
         state = SpawnState.spawning;
-
+        ResetSpawnWeights();
         for (int i = 0; i < wave.count; i++)
         {
-            SpawnEnemies(wave.enemyPrefab);
+            SpawnEnemies(wave.WeightedEnemies);
             yield return new WaitForSeconds(1f / wave.rate);
         }
 
@@ -99,21 +110,35 @@ public class WaveSpawner : MonoBehaviour
 
         yield break;
     }
-    void SpawnEnemies(GameObject[] enemies)
+    void SpawnEnemies(List<WeightedSpawnSO> enemies)
     {
         Debug.Log("Spawning enemies...");
         // Spawn enemies weighted by threat level
-        if (spawnPoints.Length == 0)
+        Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        float value = Random.value;
+        for (int i = 0; i < Weights.Length; i++)
         {
-            Debug.Log("No Spawn points");
-            GameObject randE = enemies[Random.Range(0, enemies.Length)];
-            prefab = Instantiate(randE, transform.position, transform.rotation);
+            if (value < Weights[i])
+            {
+                //  FIX
+                prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+            }
+            value -= Weights[i];
         }
-        else
+        //GameObject randE = enemies[Random.Range(0, enemies.Count)];
+        //prefab = Instantiate(randE, spawn.position, spawn.rotation);
+    }
+    void ResetSpawnWeights()
+    {
+        float totalWeight = 0;
+        for (int i = 0; i < waves[nextWave].WeightedEnemies.Count; i++)
         {
-            Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            GameObject randE = enemies[Random.Range(0, enemies.Length)];
-            prefab = Instantiate(randE, spawn.position, spawn.rotation);
+            Weights[i] = waves[nextWave].WeightedEnemies[i].GetWeight();
+            totalWeight += Weights[i];
+        }
+        for (int i = 0; i < Weights.Length; i++)
+        {
+            Weights[i] /= totalWeight;
         }
     }
 }

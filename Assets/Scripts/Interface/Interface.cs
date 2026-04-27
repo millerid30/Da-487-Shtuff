@@ -16,3 +16,7 @@ public interface IEnemyAttack3
 {
     public void EnemyAttack3();
 }
+public interface IBossAttack1
+{
+    public void BossAttack1();
+}
