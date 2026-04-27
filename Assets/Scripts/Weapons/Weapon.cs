@@ -19,7 +19,17 @@ public class Weapon : MonoBehaviour
             {
                 iDamageable.Damage(damage * weapon.powerMulti);
             }
+            if(collision.GetComponent<Rigidbody2D>() != null)
+            {
+                Rigidbody2D obj = collision.GetComponent<Rigidbody2D>();
+                Knockback(obj,damage);
+            }
         }
+    }
+    public void Knockback(Rigidbody2D rb,float force)
+    {
+        Vector2 dir = (rb.transform.position - transform.position).normalized;
+        rb.AddForce(dir * force,ForceMode2D.Impulse);
     }
     public void SauceItUp()
     {

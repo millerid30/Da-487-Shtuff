@@ -8,6 +8,7 @@ TagManager:
   - Item
   - EnemyBits
   - Boss
+  - Arena
   layers:
   - Default
   - TransparentFX

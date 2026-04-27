@@ -32,7 +32,7 @@ public class PlayerStats : MonoBehaviour
             attack.SetAttackSpeed(atkSpeed);
             damage.SetSauce(sauce);
         }
-        hpText.text = health.ToString("0.##");
+        hpText.text = playerHealth.GetHealth() + "/" + health.ToString("0.##");
         spdText.text = speed.ToString("0.##");
         pwrText.text = power.ToString("0.##");
         dpsText.text = atkSpeed.ToString("0.##");

@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput == Vector2.zero)
         {
             isMoving = false;
-            rb.linearDamping = Mathf.Lerp(rb.linearDamping, drag, Time.deltaTime * 3);
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, drag, Time.deltaTime * moveSpeed);
         }
         else
         {

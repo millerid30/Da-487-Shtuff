@@ -24,6 +24,8 @@ public class MenuController : MonoBehaviour
 
     void Menu(InputAction.CallbackContext context)
     {
+        PlayerStats playerStats = GameObject.Find("StatManager").GetComponent<PlayerStats>();
+        playerStats.UpdateStats();
         if (!menuCanvas.activeSelf && PauseController.IsGamePaused)
         {
             return;

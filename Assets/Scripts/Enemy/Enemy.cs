@@ -111,6 +111,21 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     {
         Debug.Log("Implement Attack");
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isDead)
+        {
+            if (collision.tag == "Player")
+            {
+                IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
+                if (iDamageable != null)
+                {
+                    iDamageable.Damage(enemy.power);
+                }
+            }
+
+        }
+    }
 
     void OnDeath()
     {

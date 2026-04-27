@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class WeaponSelectedUI : MonoBehaviour
 {
     [SerializeField] private Image[] image;
-    private CanvasGroup ui;
     private PlayerAttack player;
     private int selectedWeapon = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -14,7 +13,6 @@ public class WeaponSelectedUI : MonoBehaviour
         {
             i.gameObject.SetActive(false);
         }
-        ui = GetComponent<CanvasGroup>();
         player = GameObject.Find("Player").GetComponent<PlayerAttack>();
     }
 
@@ -35,14 +33,6 @@ public class WeaponSelectedUI : MonoBehaviour
                     i.gameObject.SetActive(false);
                 }
             }
-        }
-        if (PauseController.IsGamePaused)
-        {
-            ui.alpha = 0.1f;
-        }
-        else
-        {
-            ui.alpha = 1f;
         }
     }
 }
