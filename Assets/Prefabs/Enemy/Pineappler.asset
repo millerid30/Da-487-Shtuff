@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 879227b526f1dcb458275e107a596453, type: 3}
   m_Name: Pineappler
   m_EditorClassIdentifier: Assembly-CSharp::EnemySO
+  enemyID: pineappler0
   enemyName: Pineappler
   maxHealth: 50
   moveSpeed: 1.5

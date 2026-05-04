@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
+  m_Name: KillShrooms
+  m_EditorClassIdentifier: Assembly-CSharp::QuestSO
+  questID: K8d1de90d-5ede-4740-b8de-ad0449e47e1c
+  questName: KillShrooms
+  description: Not for everyone i guess
+  objectives:
+  - objectiveID: shroom0
+    description: much room for mushrooms!
+    type: 0
+    requiredAmount: 2
+    amount: 0

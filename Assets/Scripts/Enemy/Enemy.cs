@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, IEnemyAttack3
@@ -18,23 +19,28 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     [Header("Silly")]
     [Range(0f, 200f)]
     [SerializeField] protected private float sillyCoefficient = 50f;
+    [Range(0f,3f)]
+    [SerializeField] protected private float spawnDelay = 0.125f;
 
     protected private GameObject player;
     private GameObject prefab;
     protected private float distance;
+    protected private QuestController quest;
     private bool isDead;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
         player = GameObject.FindGameObjectWithTag("Player");
+        quest = GameObject.FindAnyObjectByType<QuestController>();
         isDead = false;
         health = enemy.maxHealth;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void FixedUpdate()
     {
         WanderTimer();
         if (player != null && health > 0)
@@ -51,7 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         }
         if (health <= 0)
         {
-            OnDeath();
+            StartCoroutine(OnDeath());
         }
     }
 
@@ -64,17 +70,17 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         health += heal;
         health = Mathf.Clamp(health, 0, enemy.maxHealth);
     }
-    void Move()
+    protected virtual void Move()
     {
         Vector2 direction = player.transform.position - transform.position;
 
         if (distance > minDistance)
         {
-            transform.position = Vector2.Lerp(transform.position, player.transform.position, enemy.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, player.transform.position, enemy.moveSpeed * Time.deltaTime / 2);
         }
         else
         {
-            transform.position = Vector2.Lerp(transform.position, player.transform.position, enemy.moveSpeed * Time.deltaTime / 3);
+            transform.position = Vector2.Lerp(transform.position, player.transform.position, enemy.moveSpeed * Time.deltaTime / 6);
         }
     }
     void WanderTimer()
@@ -94,7 +100,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         if (!isWandering)
         {
             float angle = Random.Range(0f, 360f);
-            rb.linearVelocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized * enemy.moveSpeed * 200 * Time.deltaTime;
+            rb.linearVelocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized * enemy.moveSpeed * 50 * Time.deltaTime;
             isWandering = true;
         }
     }
@@ -127,11 +133,17 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         }
     }
 
-    void OnDeath()
+    protected virtual IEnumerator OnDeath()
     {
         if (!isDead)
         {
+            SendDeathMessage();
             isDead = true;
+            rb.freezeRotation = false;
+            var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;
+            rb.AddForce(randForce);
+            rb.AddTorque(randForce.x * sillyCoefficient);
+            yield return new WaitForSeconds(spawnDelay);
             if (enemy.enemyGiblets != null)
             {
                 Instantiate(enemy.enemyGiblets, transform.position, transform.rotation);
@@ -141,16 +153,27 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
                 for (int i = 0; i < enemy.enemyNumDrops; i++)
                 {
                     int randD = Random.Range(0, enemy.enemyDrops.Length);
-                    var randL = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+                    Vector3 randL = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                     prefab = Instantiate(enemy.enemyDrops[randD], transform.position + randL, transform.rotation);
-                    var randF = new Vector2(Random.Range(-1f, 1f * 10f), Random.Range(-1f, 1f)) * sillyCoefficient / 10f;
-                    prefab.GetComponent<Rigidbody2D>().AddForce(randF);
+                    prefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f * 10f), Random.Range(-1f, 1f)) * sillyCoefficient / 10f);
                 }
             }
-            var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;
-            rb.AddForce(randForce);
-            rb.AddTorque(randForce.x * sillyCoefficient);
             Destroy(gameObject, 3f);
+            yield break;
+        }
+    }
+    public void SendDeathMessage()
+    {
+        if (quest == null) { return; }
+        foreach (QuestProgress questP in QuestController.Instance.activateQuests)
+        {
+            foreach (QuestObjective questO in questP.objectives)
+            {
+                if (questO.objectiveID.Equals(enemy.enemyID))
+                {
+                    questO.amount++;
+                }
+            }
         }
     }
 }

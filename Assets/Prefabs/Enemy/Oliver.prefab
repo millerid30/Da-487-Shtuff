@@ -118,6 +118,7 @@ MonoBehaviour:
   minDistance: 2
   decisionDelay: 2
   sillyCoefficient: 50
+  spawnDelay: 0.01
 --- !u!1 &2130983928616614823
 GameObject:
   m_ObjectHideFlags: 0

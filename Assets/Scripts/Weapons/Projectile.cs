@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     private float sauceMulti;
     private Rigidbody2D rb;
     private Weapon weaponParent;
+    private float logBase = 10;
+    private float logMulti = 3;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,8 +27,18 @@ public class Projectile : MonoBehaviour
             {
                 iDamageable.Damage(sauce * sauceMulti);
             }
+            if (collision.GetComponent<Rigidbody2D>() != null)
+            {
+                Rigidbody2D obj = collision.GetComponent<Rigidbody2D>();
+                Knockback(obj, Mathf.Log(sauce, logBase) * logMulti);
+            }
             Destroy(transform.parent.gameObject);
         }
+    }
+    public void Knockback(Rigidbody2D rb, float force)
+    {
+        Vector2 dir = (rb.transform.position - transform.position).normalized;
+        rb.AddForce(dir * force, ForceMode2D.Impulse);
     }
     void SetVelocity()
     {

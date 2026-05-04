@@ -80,10 +80,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6695093312418644491, guid: 3da641cdb2baa424097b204b3975ad93, type: 3}
-  m_Color: {r: 0.8867924, g: 0.4141153, b: 0.4141153, a: 1}
+  m_Color: {r: 0.8301887, g: 0.6774653, b: 0.6774653, a: 0.9607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

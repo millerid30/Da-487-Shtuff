@@ -5,6 +5,8 @@ public class Weapon : MonoBehaviour
     private float damage;
     private float sauce;
     public WeaponSO weapon;
+    private float logBase = 10;
+    private float logMulti = 10;
     [TextArea]
     [SerializeField] private string weaponDescription;
     public WeaponType weaponType;
@@ -12,7 +14,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemy" || collision.tag == "Boss")
         {
             IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
             if(iDamageable != null)
@@ -22,7 +24,7 @@ public class Weapon : MonoBehaviour
             if(collision.GetComponent<Rigidbody2D>() != null)
             {
                 Rigidbody2D obj = collision.GetComponent<Rigidbody2D>();
-                Knockback(obj,damage);
+                Knockback(obj,Mathf.Log(damage,logBase)*logMulti);
             }
         }
     }

@@ -25,14 +25,16 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         player = GameObject.FindGameObjectWithTag("Player");
         health = enemy.maxHealth;
         // Set parent of this object to parentObject
-        parentObject.GetComponentInParent<Transform>();
+        parentObject = GetComponentInParent<Pepperonipede>();
+        //parentObject.GetComponentInParent<Transform>();
+        childObject = GetComponentInChildren<Pepperonipede>();
         lastPos = transform;
         UpdateSegment();
         CreateChildren(segments);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         timer += Time.deltaTime;
         UpdateSegment();
@@ -49,8 +51,12 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         {
             Circle();
         }
-
+        if (health <= 0)
+        {
+            OnDeath();
+        }
     }
+    
     public void UpdateSegment()
     {
         if (parentObject == null)
@@ -67,7 +73,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             isTail = false;
         }
     }
-    void Move()
+    protected override void Move()
     {
         Vector2 direction = player.transform.position - transform.position;
         if (isHead)
@@ -138,7 +144,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             // instantiate segment as child of this segment
             seg = GameObject.Instantiate(segmentPrefab, transform);
             // set this segment as parent of instantiated child
-            seg.transform.SetParent(transform);
+            //seg.transform.SetParent(transform);
             Pepperonipede newP = seg.GetComponentInChildren<Pepperonipede>();
             if (newP != null)
             {

@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
 public class EnemySO : ScriptableObject
 {
+    public string enemyID;
     public string enemyName;
     public float maxHealth, moveSpeed, power, threatLevel;
     public GameObject[] enemyDrops;
