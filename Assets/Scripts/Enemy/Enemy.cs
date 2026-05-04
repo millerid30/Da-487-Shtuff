@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, IEnemyAttack3
+public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAttack1, IEnemyAttack2, IEnemyAttack3
 {
     protected private Rigidbody2D rb;
     public EnemySO enemy;
@@ -15,11 +15,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     [SerializeField] protected private float decisionDelay = 2f;
     float wanderTimer = 0f;
     bool isWandering = true;
+    bool isStunned;
 
     [Header("Silly")]
-    [Range(0f, 200f)]
+    [Range(0f, 100f)]
     [SerializeField] protected private float sillyCoefficient = 50f;
-    [Range(0f,3f)]
+    [Range(0f, 3f)]
     [SerializeField] protected private float spawnDelay = 0.125f;
 
     protected private GameObject player;
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         rb.freezeRotation = true;
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
+        isStunned = false;
         isDead = false;
         health = enemy.maxHealth;
     }
@@ -43,16 +45,19 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     protected virtual void FixedUpdate()
     {
         WanderTimer();
-        if (player != null && health > 0)
+        if (!isStunned)
         {
-            distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance <= maxDistance)
+            if (player != null && health > 0)
             {
-                Move();
-            }
-            else
-            {
-                Wander();
+                distance = Vector2.Distance(transform.position, player.transform.position);
+                if (distance <= maxDistance)
+                {
+                    Move();
+                }
+                else
+                {
+                    Wander();
+                }
             }
         }
         if (health <= 0)
@@ -124,9 +129,24 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             if (collision.tag == "Player")
             {
                 IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
+                IBumpable iBumpable = collision.gameObject.GetComponent<IBumpable>();
+                IStunnable iStunnable = collision.gameObject.GetComponent<IStunnable>();
+                Rigidbody2D objRB = collision.gameObject.GetComponent<Rigidbody2D>();
                 if (iDamageable != null)
                 {
                     iDamageable.Damage(enemy.power);
+                }
+                if (iBumpable != null)
+                {
+                    if (objRB != null)
+                    {
+                        Vector2 direction = (objRB.transform.position - transform.position).normalized;
+                        iBumpable.Knockback(direction, enemy.power);
+                    }
+                }
+                if (iStunnable != null)
+                {
+                    iStunnable.Stun(Mathf.Log10(enemy.power));
                 }
             }
 
@@ -141,8 +161,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             isDead = true;
             rb.freezeRotation = false;
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;
-            rb.AddForce(randForce);
-            rb.AddTorque(randForce.x * sillyCoefficient);
+            rb.AddForce(randForce, ForceMode2D.Impulse);
+            rb.AddTorque(randForce.x, ForceMode2D.Impulse);
             yield return new WaitForSeconds(spawnDelay);
             if (enemy.enemyGiblets != null)
             {
@@ -174,6 +194,26 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyAttack1, IEnemyAttack2, I
                     questO.amount++;
                 }
             }
+        }
+
+        QuestController.Instance.questUI.UpdateQuestUI();
+    }
+    public void Knockback(Vector2 direction, float force)
+    {
+        Vector2 dir = direction.normalized;
+        rb.AddForce(direction * force, ForceMode2D.Impulse);
+    }
+
+    public IEnumerator Stun(float duration)
+    {
+        if (!isStunned)
+        {
+            //movement = 0;
+            isStunned = true;
+            yield return new WaitForSeconds(duration);
+            // allow movement;
+            isStunned = false;
+            yield break;
         }
     }
 }

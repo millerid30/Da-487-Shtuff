@@ -186,7 +186,7 @@ MonoBehaviour:
   maxDistance: 7
   minDistance: 2
   decisionDelay: 0.5
-  sillyCoefficient: 50
+  sillyCoefficient: 25
   spawnDelay: 0.01
 --- !u!1 &9165112453666084631
 GameObject:

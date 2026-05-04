@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         // TEST damage/heal
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Keyboard.current.endKey.wasPressedThisFrame)
         {
             Damage(20);
         }

@@ -14,30 +14,36 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy" || collision.tag == "Boss")
+        if (collision.tag != "Player")
         {
             IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
-            if(iDamageable != null)
+            IBumpable iBumpable = collision.gameObject.GetComponent<IBumpable>();
+            IStunnable iStunnable = collision.gameObject.GetComponent<IStunnable>();
+            Rigidbody2D objRB = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (iDamageable != null)
             {
                 iDamageable.Damage(damage * weapon.powerMulti);
+                CinemachineShake.Instance.Shake(Mathf.Log(damage, logBase), Mathf.Log(damage, logBase));
             }
-            if(collision.GetComponent<Rigidbody2D>() != null)
+            if (iBumpable != null)
             {
-                Rigidbody2D obj = collision.GetComponent<Rigidbody2D>();
-                Knockback(obj,Mathf.Log(damage,logBase)*logMulti);
+                if (objRB != null)
+                {
+                    Vector2 direction = (objRB.transform.position - transform.position).normalized;
+                    iBumpable.Knockback(direction, Mathf.Log(damage, logBase) * logMulti);
+                }
+            }
+            if (iStunnable != null)
+            {
+                iStunnable.Stun(Mathf.Log(damage, logBase));
             }
         }
-    }
-    public void Knockback(Rigidbody2D rb,float force)
-    {
-        Vector2 dir = (rb.transform.position - transform.position).normalized;
-        rb.AddForce(dir * force,ForceMode2D.Impulse);
     }
     public void SauceItUp()
     {
         prefab = Object.Instantiate(weapon.sauceProjectile, transform.position, transform.rotation);
         Projectile newP = prefab.GetComponentInChildren<Projectile>();
-        if(newP != null)
+        if (newP != null)
         {
             newP.SetSauce(sauce);
             newP.SetSauceMulti(weapon.sauceMulti);
@@ -51,7 +57,7 @@ public class Weapon : MonoBehaviour
     {
         this.sauce = sauce;
     }
-    
+
 }
 public enum WeaponType
 {

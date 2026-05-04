@@ -1,8 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
 {
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float drag = 1.0f;
 
+    [Range(0.01f, 1.0f)]
+    [SerializeField] private float kbResist = 0.01f;
+    [Range(0.01f, 1.0f)]
+    [SerializeField] private float stunResist = 0.01f;
+    [SerializeField] private bool isStunned;
+
     [SerializeField] private Transform Aim;
     bool isMoving = false;
 
@@ -21,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        isStunned = false;
     }
 
     // Update is called once per frame
@@ -54,10 +61,27 @@ public class PlayerMovement : MonoBehaviour
             Aim.transform.up = -direction;
         }
     }
-    
+    public void Knockback(Vector2 direction, float force)
+    {
+        Vector2 dir = direction.normalized;
+        rb.AddForce(direction * force * (1 - kbResist), ForceMode2D.Impulse);
+    }
+    public IEnumerator Stun(float duration)
+    {
+        if (!isStunned)
+        {
+            isStunned = true;
+            yield return new WaitForSeconds(duration * (1 - stunResist));
+            isStunned = false;
+            yield break;
+        }
+    }
     public void Move(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        if (!isStunned)
+        {
+            moveInput = context.ReadValue<Vector2>();
+        }
     }
     public void Look(InputAction.CallbackContext context)
     {

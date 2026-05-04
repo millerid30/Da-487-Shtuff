@@ -207,7 +207,8 @@ MonoBehaviour:
   maxDistance: 10
   minDistance: 3
   decisionDelay: 2
-  sillyCoefficient: 50
+  sillyCoefficient: 25
+  spawnDelay: 0.125
   segmentPrefab: {fileID: 1952795797808552625}
   segments: 10
   isHead: 0
