@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879227b526f1dcb458275e107a596453, type: 3}
+  m_Name: Nappler
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySO
+  enemyID: nappler0
+  enemyName: Nappler
+  maxHealth: 50
+  moveSpeed: 1.5
+  power: 20
+  threatLevel: 3
+  enemyDrops:
+  - {fileID: 2755195444424325990, guid: c704424cb0693be4a876148762eddf5b, type: 3}
+  - {fileID: 2845003291423222579, guid: 7d6a0aec239462e49886a5aa5197f32b, type: 3}
+  - {fileID: 5395591967599651848, guid: f9093f9e2e1458d45ac2ab3272984767, type: 3}
+  - {fileID: 3512177818946902236, guid: 47dee704fb335df4abbf08082d305888, type: 3}
+  - {fileID: 4909316414308455582, guid: d1b749344518a4943b6f19c940ffcb26, type: 3}
+  enemyNumDrops: 5
+  enemyGiblets: {fileID: 3764484659146225686, guid: 952b2ea32b2db6c4190be92bff3d3145, type: 3}

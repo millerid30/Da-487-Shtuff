@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
             if (iDamageable != null)
             {
                 iDamageable.Damage(damage * weapon.powerMulti);
-                CinemachineShake.Instance.Shake(Mathf.Log(damage, logBase), Mathf.Log(damage, logBase));
+                CinemachineShake.Instance.Shake(weapon.powerMulti, Mathf.Log(damage * weapon.powerMulti, logBase * logMulti) / (logMulti * weapon.atkSpeedMulti));
             }
             if (iBumpable != null)
             {
@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour
             }
             if (iStunnable != null)
             {
-                iStunnable.Stun(Mathf.Log(damage, logBase));
+                StartCoroutine(iStunnable.Stun(Mathf.Log(damage, logBase)));
             }
         }
     }

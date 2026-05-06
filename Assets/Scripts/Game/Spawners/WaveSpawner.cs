@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public static WaveSpawner Instance { get; private set; }
     public enum SpawnState { spawning, waiting, counting };
     [System.Serializable]
     public class Wave
     {
         public string name;
-        //public GameObject[] enemyPrefab;
         public List<WeightedSpawnSO> WeightedEnemies = new List<WeightedSpawnSO>();
         public int count;
         public int points;
@@ -17,9 +17,16 @@ public class WaveSpawner : MonoBehaviour
     }
     public Wave[] waves;
     [SerializeField] private float[] Weights;
-    int nextWave = 0;
+    public int nextWave = 0;
 
+    private int numPoints = 0;
     public Transform[] spawnPoints;
+    private GameObject arenaObject;
+    private Arena arena;
+
+    public GameObject[] enemyPrefab;
+    private EnemySO enemySO;
+    public Dictionary<string, EnemySO> enemyList;
 
     [SerializeField] private float timeBetweenWaves = 5;
     private float waveCountdown;
@@ -30,15 +37,22 @@ public class WaveSpawner : MonoBehaviour
     private GameObject prefab;
     private void Awake()
     {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
         Weights = new float[waves[nextWave].WeightedEnemies.Count];
     }
 
     private void Start()
     {
-        if (spawnPoints.Length == 0)
-        {
-            Debug.Log("No Spawn points");
-        }
+        arenaObject = GameObject.FindGameObjectWithTag("Arena");
+        arena = arenaObject.GetComponent<Arena>();
+        numPoints = arena.GetSpawnCount();
+        if (spawnPoints == null) { spawnPoints = new Transform[numPoints]; }
+        //for (int i = 0; i < spawnPoints.Length; i++)
+        //{
+        //    spawnPoints[i] = ArenaManager.Instance.spawnPoints[i];
+        //}
+        //SetEnemySpawns();
         waveCountdown = timeBetweenWaves;
     }
     private void Update()
@@ -100,6 +114,11 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Spawning Wave: " + wave.name);
         state = SpawnState.spawning;
         ResetSpawnWeights();
+
+        // Difficulty Scaling
+        float num = wave.count * DifficultyController.Instance.difficulty;
+        wave.count = Mathf.RoundToInt(num);
+
         for (int i = 0; i < wave.count; i++)
         {
             SpawnEnemies(wave.WeightedEnemies);
@@ -121,12 +140,28 @@ public class WaveSpawner : MonoBehaviour
             if (value < Weights[i])
             {
                 //  FIX
-                prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+                if (spawn != null)
+                {
+                    prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+                }
             }
             value -= Weights[i];
         }
         //GameObject randE = enemies[Random.Range(0, enemies.Count)];
         //prefab = Instantiate(randE, spawn.position, spawn.rotation);
+    }
+    public void ManualSpawn(string id)
+    {
+        Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        foreach (var obj in enemyPrefab)
+        {
+            Enemy enemy = obj.GetComponent<Enemy>();
+            if (enemy == null) { Debug.Log(id + " is null!"); return; }
+            if (id.Equals(enemy.enemy.enemyID))
+            {
+                prefab = Instantiate(obj, spawn.position, spawn.rotation);
+            }
+        }
     }
     void ResetSpawnWeights()
     {
@@ -140,5 +175,11 @@ public class WaveSpawner : MonoBehaviour
         {
             Weights[i] /= totalWeight;
         }
+    }
+    public void SetEnemySpawns()
+    {
+        arenaObject = GameObject.FindGameObjectWithTag("Arena");
+        arena = arenaObject.GetComponent<Arena>();
+        spawnPoints = arena.GetEnemySpawns();
     }
 }

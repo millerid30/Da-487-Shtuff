@@ -9,6 +9,8 @@ TagManager:
   - EnemyBits
   - Boss
   - Arena
+  - OldArena
+  - Customer
   layers:
   - Default
   - TransparentFX

@@ -146,7 +146,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
                 }
                 if (iStunnable != null)
                 {
-                    iStunnable.Stun(Mathf.Log10(enemy.power));
+                    StartCoroutine(iStunnable.Stun(Mathf.Log10(enemy.power)));
                 }
             }
 
@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
             rb.freezeRotation = false;
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;
             rb.AddForce(randForce, ForceMode2D.Impulse);
-            rb.AddTorque(randForce.x, ForceMode2D.Impulse);
+            rb.AddTorque(randForce.x / 2, ForceMode2D.Impulse);
             yield return new WaitForSeconds(spawnDelay);
             if (enemy.enemyGiblets != null)
             {
@@ -197,6 +197,8 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         }
 
         QuestController.Instance.questUI.UpdateQuestUI();
+        DifficultyController.Instance.enemiesDefeated++;
+        DifficultyController.Instance.IncreaseDifficulty(enemy.threatLevel);
     }
     public void Knockback(Vector2 direction, float force)
     {

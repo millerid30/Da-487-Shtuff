@@ -23,22 +23,28 @@ public class Projectile : MonoBehaviour
         if ((whatDestroysProjectile.value & (1 << collision.gameObject.layer)) > 0)
         {
             IDamageable iDamageable = collision.gameObject.GetComponent<IDamageable>();
+            IBumpable iBumpable = collision.gameObject.GetComponent<IBumpable>();
+            IStunnable iStunnable = collision.gameObject.GetComponent<IStunnable>();
+            Rigidbody2D objRB = collision.gameObject.GetComponent<Rigidbody2D>();
             if (iDamageable != null)
             {
                 iDamageable.Damage(sauce * sauceMulti);
+                CinemachineShake.Instance.Shake(proj.damage / proj.speed, Mathf.Log(sauce * sauceMulti, logBase * logMulti) / (logMulti * proj.speed));
             }
-            if (collision.GetComponent<Rigidbody2D>() != null)
+            if (iBumpable != null)
             {
-                Rigidbody2D obj = collision.GetComponent<Rigidbody2D>();
-                Knockback(obj, Mathf.Log(sauce, logBase) * logMulti);
+                if (objRB != null)
+                {
+                    Vector2 direction = (objRB.transform.position - transform.position).normalized;
+                    iBumpable.Knockback(direction, Mathf.Log(sauce, logBase) * logMulti);
+                }
+            }
+            if (iStunnable != null)
+            {
+                StartCoroutine(iStunnable.Stun(Mathf.Log(sauce, logBase)));
             }
             Destroy(transform.parent.gameObject);
         }
-    }
-    public void Knockback(Rigidbody2D rb, float force)
-    {
-        Vector2 dir = (rb.transform.position - transform.position).normalized;
-        rb.AddForce(dir * force, ForceMode2D.Impulse);
     }
     void SetVelocity()
     {
