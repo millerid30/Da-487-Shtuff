@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
   m_Name: KillOlives
   m_EditorClassIdentifier: Assembly-CSharp::QuestSO
-  questID: K10ec71b6-4800-4854-a77d-3e88f91c1e55
+  questID: KillOlivese8495b91-a17b-40db-9e1a-1786781b1d66
   questName: KillOlives
   description: they gotta go
   objectives:

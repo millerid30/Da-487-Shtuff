@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
   m_Name: TestOrder
   m_EditorClassIdentifier: Assembly-CSharp::QuestSO
-  questID: TestOrderd6bf1d45-2448-445a-a0bd-2734fa9f3e55
+  questID: TestOrderabd9aa4f-1184-4c2a-9fcc-52ac9376f556
   questName: TestOrder
   description: yea make me a pizza dude
   objectives:

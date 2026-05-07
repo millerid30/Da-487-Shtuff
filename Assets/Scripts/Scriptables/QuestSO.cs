@@ -33,6 +33,7 @@ public enum ObjectiveType
 {
     Eliminate,
     Survive,
+    Boss,
     Other
 };
 

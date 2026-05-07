@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -160,6 +161,7 @@ public class WaveSpawner : MonoBehaviour
         {
             Enemy enemy = obj.GetComponent<Enemy>();
             if (enemy == null) { Debug.Log(id + " is null!"); return; }
+            Debug.Log("Spawning: " + id);
             if (id.Equals(enemy.enemy.enemyID))
             {
                 prefab = Instantiate(obj, spawn.position, spawn.rotation);

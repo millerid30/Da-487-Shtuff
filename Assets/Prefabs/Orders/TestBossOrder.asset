@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
   m_Name: TestBossOrder
   m_EditorClassIdentifier: Assembly-CSharp::QuestSO
-  questID: T90c0e114-953b-461e-8f4b-37bc9dc0e0ba
+  questID: TestBossOrder5ee5b3e1-4f9a-4ba0-9585-59754be96bb6
   questName: TestBossOrder
   description: dont make me call your manager
   objectives:

@@ -46,6 +46,15 @@ public class Customer : MonoBehaviour
         }
         sprite = GetComponentInChildren<Image>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        // Summon boss if Boss Quest
+        for (int i = 0; i < quest.objectives.Count; i++)
+        {
+            if (quest.objectives[i].type.ToString() == "Boss")
+            {
+                WaveSpawner.Instance.ManualSpawn(quest.objectives[i].objectiveID);
+            }
+        }
     }
 
     // Update is called once per frame

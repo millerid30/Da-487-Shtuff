@@ -3743,6 +3743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pepperonipede
       objectReference: {fileID: 0}
+    - target: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.82

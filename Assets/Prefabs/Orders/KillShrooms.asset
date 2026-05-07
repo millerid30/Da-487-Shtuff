@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
   m_Name: KillShrooms
   m_EditorClassIdentifier: Assembly-CSharp::QuestSO
-  questID: K8d1de90d-5ede-4740-b8de-ad0449e47e1c
+  questID: KillShrooms5cd80f32-4062-4895-8c52-c4d4240cc6fd
   questName: KillShrooms
   description: Not for everyone i guess
   objectives:

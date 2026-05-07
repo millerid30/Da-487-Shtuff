@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed9c9def8f2e7e48a915a4518f846d2, type: 3}
   m_Name: KillNapples
   m_EditorClassIdentifier: Assembly-CSharp::QuestSO
-  questID: K3f2a81ac-4faf-4822-8016-c9010feba97d
+  questID: KillPineapples85dbd34e-0772-4899-a1b2-dcf6e44e1ea5
   questName: KillPineapples
   description: Nobody likes them anyway
   objectives:
