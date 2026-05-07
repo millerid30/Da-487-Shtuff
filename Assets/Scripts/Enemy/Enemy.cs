@@ -5,9 +5,11 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
 {
     protected private Rigidbody2D rb;
     public EnemySO enemy;
-
+    protected private float difficulty = 1;
+    public bool isStunned;
     [Header("Health")]
     [SerializeField] protected private float health;
+    protected private float maxHealth = 1;
 
     [Header("Distance")]
     [SerializeField] protected private float maxDistance = 7f;
@@ -15,13 +17,15 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     [SerializeField] protected private float decisionDelay = 2f;
     float wanderTimer = 0f;
     bool isWandering = true;
-    bool isStunned;
+    //bool isStunned;
 
     [Header("Silly")]
     [Range(0f, 100f)]
     [SerializeField] protected private float sillyCoefficient = 50f;
     [Range(0f, 3f)]
     [SerializeField] protected private float spawnDelay = 0.125f;
+
+    protected private int numDrops = 1;
 
     protected private GameObject player;
     private GameObject prefab;
@@ -32,13 +36,16 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        difficulty = DifficultyController.Instance.difficulty;
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
         isStunned = false;
         isDead = false;
-        health = enemy.maxHealth;
+        maxHealth = enemy.maxHealth * difficulty;
+        health = maxHealth;
+        numDrops = Mathf.RoundToInt(1 + enemy.enemyNumDrops * difficulty / 10);
     }
 
     // Update is called once per frame
@@ -73,7 +80,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     public void Heal(float heal)
     {
         health += heal;
-        health = Mathf.Clamp(health, 0, enemy.maxHealth);
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
     protected virtual void Move()
     {
@@ -170,7 +177,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
             }
             if (enemy.enemyDrops != null)
             {
-                for (int i = 0; i < enemy.enemyNumDrops; i++)
+                for (int i = 0; i < numDrops; i++)
                 {
                     int randD = Random.Range(0, enemy.enemyDrops.Length);
                     Vector3 randL = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);

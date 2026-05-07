@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Roller
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   weaponName: Roller
-  powerMulti: 2
+  powerMulti: 1.5
   atkSpeedMulti: 0.75
   sauceMulti: 1
+  sauceProjectile: {fileID: 0}

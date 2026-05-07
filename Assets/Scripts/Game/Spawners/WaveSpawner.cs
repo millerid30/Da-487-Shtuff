@@ -86,6 +86,7 @@ public class WaveSpawner : MonoBehaviour
     }
     void WaveCompleted()
     {
+        DifficultyController.Instance.wavesCompleted++;
         Debug.Log("Wave Complete!");
         state = SpawnState.counting;
         waveCountdown = timeBetweenWaves;
@@ -113,11 +114,11 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning Wave: " + wave.name);
         state = SpawnState.spawning;
-        ResetSpawnWeights();
+        //ResetSpawnWeights();
 
         // Difficulty Scaling
-        float num = wave.count * DifficultyController.Instance.difficulty;
-        wave.count = Mathf.RoundToInt(num);
+        //float num = wave.count * DifficultyController.Instance.difficulty;
+        //wave.count = Mathf.RoundToInt(num);
 
         for (int i = 0; i < wave.count; i++)
         {
@@ -133,22 +134,24 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning enemies...");
         // Spawn enemies weighted by threat level
-        Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        float value = Random.value;
-        for (int i = 0; i < Weights.Length; i++)
+        for (int j = 0; j < DifficultyController.Instance.difficulty; j++)
         {
-            if (value < Weights[i])
+            Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            float value = Random.value;
+            for (int i = 0; i < Weights.Length; i++)
             {
-                //  FIX
-                if (spawn != null)
+                if (value < Weights[i])
                 {
-                    prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+                    //  FIX
+                    if (spawn != null)
+                    {
+                        prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+                    }
                 }
+                value -= Weights[i];
             }
-            value -= Weights[i];
+            ResetSpawnWeights();
         }
-        //GameObject randE = enemies[Random.Range(0, enemies.Count)];
-        //prefab = Instantiate(randE, spawn.position, spawn.rotation);
     }
     public void ManualSpawn(string id)
     {

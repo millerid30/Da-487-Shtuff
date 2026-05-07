@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Customer : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class Customer : MonoBehaviour
     private GameObject prefab;
     private Arena arena;
     private Transform tipSpawnpoint;
+
+    [Header("Color")]
+    [SerializeField] private Color startColor = Color.white;
+    [SerializeField] private Color endColor = Color.red;
+    [SerializeField] private Color winColor = Color.green;
+    private Image sprite;
 
     [Header("Silly")]
     [SerializeField] private float launchForce = 1200f;
@@ -37,7 +44,7 @@ public class Customer : MonoBehaviour
         {
             tipSpawnpoint = arena.GetTipSpawn();
         }
-
+        sprite = GetComponentInChildren<Image>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -46,6 +53,7 @@ public class Customer : MonoBehaviour
     {
         waitTime -= Time.deltaTime;
         waitTime = Mathf.Clamp(waitTime, 0, float.MaxValue);
+        Patience();
         if (waitTime <= 0)
         {
             if (isServed)
@@ -56,13 +64,19 @@ public class Customer : MonoBehaviour
             {
                 OrderFailed();
             }
-            CustomerQueue.Instance.CallNextCustomer();
         }
-
-        // TEST
-        if (Keyboard.current.spaceKey.isPressed)
+        if (QuestController.Instance.IsQuestCompleted(customer.customerQuest.questID))
         {
             OrderComplete();
+        }
+        // TEST
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            OrderComplete();
+        }
+        if (Keyboard.current.vKey.wasPressedThisFrame)
+        {
+            OrderFailed();
         }
     }
     void GiveOrder(QuestSO quest)
@@ -81,7 +95,8 @@ public class Customer : MonoBehaviour
                 var randTip = Random.Range(0, customer.customerTips.Length);
                 GiveTip(customer.customerTips[randTip]);
             }
-
+            // Color
+            sprite.color = winColor;
             // Silly Shit
             SillySilly();
             StartCoroutine(PartingGift());
@@ -100,7 +115,8 @@ public class Customer : MonoBehaviour
                 string id = customer.customerShits[randTip].GetComponent<Enemy>().enemy.enemyID;
                 if (id != null) { WaveSpawner.Instance.ManualSpawn(id); }
             }
-
+            // Color
+            sprite.color = endColor;
             // Silly Shit
             SillySilly();
             StartCoroutine(FartingGift());
@@ -116,6 +132,13 @@ public class Customer : MonoBehaviour
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 2;
             prb.AddForce(randForce, ForceMode2D.Impulse);
             prb.AddTorque(randForce.x, ForceMode2D.Impulse);
+        }
+    }
+    void Patience()
+    {
+        if (!isServed)
+        {
+            sprite.color = Color.Lerp(startColor, endColor, 1 - (waitTime / customer.maxWaitTime));
         }
     }
     void SillySilly()
@@ -134,6 +157,7 @@ public class Customer : MonoBehaviour
         DifficultyController.Instance.ordersCompleted++;
         DifficultyController.Instance.IncreaseDifficulty((1 - (waitTime / customer.maxWaitTime)) * 60);
         //
+        SendOrderCompletion();
         yield return new WaitForSeconds(killTime);
         CustomerQueue.Instance.CustomerLeft();
         yield return new WaitForSeconds(1);
@@ -146,10 +170,16 @@ public class Customer : MonoBehaviour
         DifficultyController.Instance.ordersFailed++;
         DifficultyController.Instance.IncreaseDifficulty(customer.failMulti * (1 - (waitTime / customer.maxWaitTime)) * 60);
         //
+        SendOrderCompletion();
         yield return new WaitForSeconds(killTime);
         CustomerQueue.Instance.CustomerLeft();
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
         yield break;
+    }
+    void SendOrderCompletion()
+    {
+        QuestController.Instance.CompleteQuest(customer.customerQuest.questID);
+        Arena.Instance.IsComplete();
     }
 }

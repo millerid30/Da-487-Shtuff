@@ -6,29 +6,33 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     public GameObject segmentPrefab;
     public int segments = 10;
     public bool isHead = false;
-    public bool isTail = false;
+    //public bool isTail = false;
 
     [Header("Movement")]
-    [SerializeField] private float turnSpeed = 5f;
-    [SerializeField] private float lastPosTimer = 1f;
+    [SerializeField] private float turnSpeed = 20f;
+    [Range(0.01f, 1f)]
+    [SerializeField] private float tailSpeedMulti = 0.95f;
     private float timer;
 
-    public Pepperonipede parentObject; // parent of this segment
+    public Transform aim;
+    public Transform tail;
+    public Transform follow;
     private GameObject seg;
-    public Pepperonipede childObject; // child of this segment
-    private Transform lastPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        health = enemy.maxHealth;
-        // Set parent of this object to parentObject
-        parentObject = GetComponentInParent<Pepperonipede>();
-        //parentObject.GetComponentInParent<Transform>();
-        childObject = GetComponentInChildren<Pepperonipede>();
-        lastPos = transform;
+        maxHealth = enemy.maxHealth * difficulty;
+        health = maxHealth;
+
+        if (transform.parent != null)
+        {
+            follow = transform.parent.GetComponent<Pepperonipede>().GiveTail();
+            transform.position = follow.position;
+        }
+
         UpdateSegment();
         CreateChildren(segments);
     }
@@ -38,40 +42,31 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     {
         timer += Time.deltaTime;
         UpdateSegment();
-        if (timer >= lastPosTimer)
+
+        if (player != null && health > 0)
         {
-            lastPos = transform;
-            LastPositionTimer();
-        }
-        if (distance >= minDistance)
-        {
+            distance = Vector2.Distance(transform.position, player.transform.position);
             Move();
         }
-        else
-        {
-            Circle();
-        }
+
         if (health <= 0)
         {
-            OnDeath();
+            if (tail != null)
+            {
+                for (int i = transform.childCount - 2; i >= 0; i--)
+                {
+                    Destroy(gameObject.transform.GetChild(i).gameObject);
+                }
+                Destroy(tail.gameObject);
+            }
+            transform.DetachChildren();
+            StartCoroutine(OnDeath());
         }
     }
-    
+
     public void UpdateSegment()
     {
-        if (parentObject == null)
-        {
-            isHead = true;
-        }
-        else if (childObject == null)
-        {
-            isTail = true;
-        }
-        else
-        {
-            isHead = false;
-            isTail = false;
-        }
+        isHead = (follow == null);
     }
     protected override void Move()
     {
@@ -81,7 +76,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             Turn();
             if (distance > minDistance)
             {
-                rb.AddForce(transform.up * enemy.moveSpeed * Time.deltaTime * 50);
+                rb.AddForce(aim.transform.up * enemy.moveSpeed * Time.deltaTime * 50);
             }
             //else if (distance < minDistance)
             //{
@@ -91,14 +86,13 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             {
                 // circle script
                 // Circle();
-                rb.AddForce(transform.up * enemy.moveSpeed * Time.deltaTime * 25);
+                rb.AddForce(aim.transform.up * enemy.moveSpeed * Time.deltaTime * 25);
             }
         }
         else
         {
-            // follow parent
             Follow();
-            transform.position = Vector2.Lerp(transform.position, parentObject.transform.position, enemy.moveSpeed * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, follow.transform.position, enemy.moveSpeed * Time.deltaTime * 25);
         }
     }
     void Turn()
@@ -106,18 +100,11 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         Vector2 direction = (player.transform.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         Quaternion target = Quaternion.AngleAxis(angle, Vector3.back);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * turnSpeed / 10);
+        aim.transform.rotation = Quaternion.Slerp(aim.transform.rotation, target, Time.deltaTime * turnSpeed);
     }
     void Follow()
     {
-        Vector2 direction = (parentObject.transform.position - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        Quaternion target = Quaternion.AngleAxis(angle, Vector3.back);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * turnSpeed / 10);
-    }
-    void LastPositionTimer()
-    {
-        timer = 0;
+        aim.transform.rotation = Quaternion.Slerp(aim.transform.rotation, follow.rotation, Time.deltaTime * turnSpeed * tailSpeedMulti);
     }
     void CircleTimer()
     {
@@ -143,6 +130,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             segments--;
             // instantiate segment as child of this segment
             seg = GameObject.Instantiate(segmentPrefab, transform);
+            seg.transform.localPosition = Vector2.zero;
             // set this segment as parent of instantiated child
             //seg.transform.SetParent(transform);
             Pepperonipede newP = seg.GetComponentInChildren<Pepperonipede>();
@@ -151,5 +139,9 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
                 newP.SetSegments(segments);
             }
         }
+    }
+    public Transform GiveTail()
+    {
+        return tail;
     }
 }

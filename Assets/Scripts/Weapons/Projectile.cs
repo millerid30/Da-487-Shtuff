@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
             if (iDamageable != null)
             {
                 iDamageable.Damage(sauce * sauceMulti);
-                CinemachineShake.Instance.Shake(proj.damage / proj.speed, Mathf.Log(sauce * sauceMulti, logBase * logMulti) / (logMulti * proj.speed));
+                CinemachineShake.Instance.Shake(1 + proj.damage / proj.speed, 0.1f + (0.05f * sauceMulti) + (0.05f / proj.speed));
             }
             if (iBumpable != null)
             {

@@ -36,11 +36,12 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
         if (moveInput == Vector2.zero)
         {
             isMoving = false;
-            rb.linearDamping = Mathf.Lerp(rb.linearDamping, drag, Time.deltaTime * moveSpeed);
+            rb.linearDamping = Mathf.Lerp(rb.linearDamping, drag, Time.deltaTime * moveSpeed * 5);
         }
         else
         {
             isMoving = true;
+            rb.linearDamping = drag / 4;
         }
         rb.AddForce(moveInput.normalized * moveSpeed * Time.deltaTime * 150);
 

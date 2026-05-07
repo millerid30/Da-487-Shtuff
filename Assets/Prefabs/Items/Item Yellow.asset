@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Speed Item
   health: 1
-  speed: 1.05
+  speed: 1.02
   power: 1
   atkSpeed: 1
   sauce: 1

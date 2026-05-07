@@ -22,7 +22,7 @@ TagManager:
   - Enemy
   - Item
   - Boss
-  - 
+  - Arena
   - 
   - 
   - 
@@ -47,6 +47,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemy
+    uniqueID: 4151555805
+    locked: 0
+  - name: Boss
+    uniqueID: 4216327137
     locked: 0
   - name: Player
     uniqueID: 4148717775

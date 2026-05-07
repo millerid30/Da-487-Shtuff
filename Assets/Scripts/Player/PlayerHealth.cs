@@ -23,7 +23,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
         coll = player.GetComponent<Collider2D>();
-        spr = player.GetComponent<SpriteRenderer>();
+        spr = player.GetComponentInChildren<SpriteRenderer>();
+        Physics2D.IgnoreLayerCollision(6, 7, false);
         SetHpBar();
     }
 
@@ -75,8 +76,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     IEnumerator IFrames(float seconds)
     {
         // Ignore enemy layer
-                                        //whatPlayerIgnores.value
-        Physics2D.IgnoreLayerCollision(6, 7, true);
+        int layer = gameObject.layer;
+        for (int i = 0; i < 32; i++)
+        {
+            if ((whatPlayerIgnores.value & (1 << i)) != 0)
+            {
+                Physics2D.IgnoreLayerCollision(layer, i, true);
+            }
+        }
+        //Physics2D.IgnoreLayerCollision(6, 7, true);
         // Lower alpha
         Color c = Color.white;
         c.a = 0.75f;
@@ -84,8 +92,15 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         // Maybe flash or something
         yield return new WaitForSeconds(seconds);
         // Unignore layer
-                                        //whatPlayerIgnores.value
-        Physics2D.IgnoreLayerCollision(6, 7, false);
+        for (int i = 0; i < 32; i++)
+        {
+            if ((whatPlayerIgnores.value & (1 << i)) != 0)
+            {
+                Physics2D.IgnoreLayerCollision(layer, i, false);
+            }
+        }
+        //whatPlayerIgnores.value
+        //Physics2D.IgnoreLayerCollision(6, 7, false);
         // Alpha = 1
         c.a = 1f;
         spr.color = c;

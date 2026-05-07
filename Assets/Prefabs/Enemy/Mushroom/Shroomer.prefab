@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemy: {fileID: 11400000, guid: 097c036685451f34bad56358df7a3baa, type: 2}
+  isStunned: 0
   health: 0
   maxDistance: 7
   minDistance: 2
@@ -265,8 +266,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -143411491
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3513677772202510069, guid: 6121d6256a28eba439d34c5d114fd0b5, type: 3}

@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.42261827, w: 0.9063079}
   m_LocalPosition: {x: 0.004, y: -0.639, z: 0}
-  m_LocalScale: {x: 0.2898, y: 0.2898, z: 0.023234772}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.03207008}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50}
@@ -157,5 +157,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   weapon: {fileID: 11400000, guid: 7cc64a4baece0ce449b7f6d6181226f8, type: 2}
   weaponDescription: Professional Grade Pizza Cutter. High grade damascus steel folded
-    67 times. Fast slicing attacks, at the cost of power and range.
+    67 times. Fast slicing attacks at the cost of power and range.
   weaponType: 0

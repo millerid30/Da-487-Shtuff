@@ -17,7 +17,7 @@ MonoBehaviour:
   description: dont make me call your manager
   objectives:
   - objectiveID: nappler0
-    description: get em!
+    description: get em pineapples!
     type: 0
-    requiredAmount: 5
+    requiredAmount: 10
     amount: 0

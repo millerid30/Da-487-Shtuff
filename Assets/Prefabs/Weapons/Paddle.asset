@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Paddle
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
   weaponName: Paddle
-  powerMulti: 5
+  powerMulti: 3
   atkSpeedMulti: 0.5
   sauceMulti: 0.5
+  sauceProjectile: {fileID: 0}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shroomer Spawn
   m_EditorClassIdentifier: Assembly-CSharp::WeightedSpawnSO
   enemy: {fileID: 7134664333846991566, guid: 0cb9d5cb270363f43b8411882373f6f3, type: 3}
-  MinWeight: 0.3
-  MaxWeight: 0.35
+  MinWeight: 0.35
+  MaxWeight: 0.45

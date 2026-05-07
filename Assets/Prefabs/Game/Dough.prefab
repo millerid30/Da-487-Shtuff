@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 3531212542182733338}
   - component: {fileID: 2576687295831173713}
   - component: {fileID: 5857960692526980754}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dough
   m_TagString: Arena
   m_Icon: {fileID: 0}

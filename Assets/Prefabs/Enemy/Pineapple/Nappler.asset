@@ -24,5 +24,5 @@ MonoBehaviour:
   - {fileID: 5395591967599651848, guid: f9093f9e2e1458d45ac2ab3272984767, type: 3}
   - {fileID: 3512177818946902236, guid: 47dee704fb335df4abbf08082d305888, type: 3}
   - {fileID: 4909316414308455582, guid: d1b749344518a4943b6f19c940ffcb26, type: 3}
-  enemyNumDrops: 5
+  enemyNumDrops: 3
   enemyGiblets: {fileID: 3764484659146225686, guid: 952b2ea32b2db6c4190be92bff3d3145, type: 3}

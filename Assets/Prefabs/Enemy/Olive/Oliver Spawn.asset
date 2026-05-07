@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Oliver Spawn
   m_EditorClassIdentifier: Assembly-CSharp::WeightedSpawnSO
   enemy: {fileID: 117279171865853566, guid: 1a2e000106516fe478251f975315ae90, type: 3}
-  MinWeight: 0.5
-  MaxWeight: 0.55
+  MinWeight: 0.6
+  MaxWeight: 0.75

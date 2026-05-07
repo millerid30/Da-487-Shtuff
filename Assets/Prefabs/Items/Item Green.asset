@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item Green
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Health Item
-  health: 1.05
+  health: 1.02
   speed: 1
   power: 1
   atkSpeed: 1

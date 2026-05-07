@@ -19,5 +19,5 @@ MonoBehaviour:
   - objectiveID: oliver0
     description: I WANT OLIVE
     type: 0
-    requiredAmount: 99
+    requiredAmount: 5
     amount: 0

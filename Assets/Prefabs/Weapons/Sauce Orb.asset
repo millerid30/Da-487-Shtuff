@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSO
   projectileName: Sauce Orb
   damage: 10
-  speed: 10
-  lifespan: 2
+  speed: 30
+  lifespan: 1

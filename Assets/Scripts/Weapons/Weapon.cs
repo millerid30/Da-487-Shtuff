@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
     private float sauce;
     public WeaponSO weapon;
     private float logBase = 10;
-    private float logMulti = 10;
+    private float logMulti = 5;
     [TextArea]
     [SerializeField] private string weaponDescription;
     public WeaponType weaponType;
@@ -23,19 +23,19 @@ public class Weapon : MonoBehaviour
             if (iDamageable != null)
             {
                 iDamageable.Damage(damage * weapon.powerMulti);
-                CinemachineShake.Instance.Shake(weapon.powerMulti, Mathf.Log(damage * weapon.powerMulti, logBase * logMulti) / (logMulti * weapon.atkSpeedMulti));
+                CinemachineShake.Instance.Shake(weapon.powerMulti + (1 / weapon.atkSpeedMulti), 0.2f + (0.05f * weapon.powerMulti) + (0.05f / weapon.atkSpeedMulti));
             }
             if (iBumpable != null)
             {
                 if (objRB != null)
                 {
                     Vector2 direction = (objRB.transform.position - transform.position).normalized;
-                    iBumpable.Knockback(direction, Mathf.Log(damage, logBase) * logMulti);
+                    iBumpable.Knockback(direction, (weapon.powerMulti / weapon.atkSpeedMulti) * Mathf.Log(damage, logBase) * logMulti);
                 }
             }
             if (iStunnable != null)
             {
-                StartCoroutine(iStunnable.Stun(Mathf.Log(damage, logBase)));
+                iStunnable.Stun(weapon.powerMulti / weapon.atkSpeedMulti);
             }
         }
     }

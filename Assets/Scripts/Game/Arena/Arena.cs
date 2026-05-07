@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Arena : MonoBehaviour
 {
+    public static Arena Instance { get; private set; }
     [SerializeField] private Transform[] enemySpawnpoints;
     [SerializeField] private Transform tipSpawn;
     private bool isComplete;
@@ -14,6 +15,7 @@ public class Arena : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -32,12 +34,12 @@ public class Arena : MonoBehaviour
 
         if (Keyboard.current.homeKey.wasPressedThisFrame)
         {
-            isComplete = true;
+            IsComplete();
         }
     }
-    public bool IsComplete()
+    public void IsComplete()
     {
-        return isComplete;
+        isComplete = true;
     }
     public IEnumerator RemoveArena(float destroyTime)
     {

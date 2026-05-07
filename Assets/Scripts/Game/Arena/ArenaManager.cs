@@ -8,7 +8,7 @@ public class ArenaManager : MonoBehaviour
     public List<GameObject> oldArenas = new List<GameObject>();
     private GameObject prefab;
     private GameObject arenaObject;
-    private Arena arena;
+    public Arena arena;
 
     public Transform[] spawnPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
