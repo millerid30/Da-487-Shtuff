@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemySO", menuName = "Scriptable Objects/EnemySO")]
@@ -6,7 +7,7 @@ public class EnemySO : ScriptableObject
     public string enemyID;
     public string enemyName;
     public float maxHealth, moveSpeed, power, threatLevel;
-    public GameObject[] enemyDrops;
+    public List<WeightedSpawnSO> enemyDrops = new List<WeightedSpawnSO>();
     public int enemyNumDrops;
     public GameObject enemyGiblets;
 }

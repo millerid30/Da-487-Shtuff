@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1467253846923609376
+--- !u!1001 &8576724744629762701
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.b
-      value: 0.7924528
+      value: 0.12255252
       objectReference: {fileID: 0}
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.g
-      value: 0.13082945
+      value: 0.95225364
       objectReference: {fileID: 0}
     - target: {fileID: 541674450765455635, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.r
-      value: 0.56797117
+      value: 0.9622642
       objectReference: {fileID: 0}
     - target: {fileID: 1724227821939890786, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Pivot.x
@@ -118,27 +118,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5800036936729792958, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Name
-      value: Item Purple
+      value: Item Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
+      propertyPath: ID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 4e9151e50926cd64f8e528d9bc65faeb, type: 2}
+      objectReference: {fileID: 11400000, guid: 3928195a8f428ba4a91881971efedee5, type: 2}
     - target: {fileID: 8377197555503732359, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: itemDescription
-      value: Grape orb. Increases sauce.
+      value: Lemon orb. Increases speed.
       objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.b
-      value: 0.79215693
+      value: 0.121568635
       objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.g
-      value: 0.12941177
+      value: 0.95294124
       objectReference: {fileID: 0}
     - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
       propertyPath: m_Color.r
-      value: 0.5686275
+      value: 0.9607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001753713664804785, guid: 2a47c6a816bf1db4ea3cb925b66da36d, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

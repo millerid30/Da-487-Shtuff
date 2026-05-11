@@ -31,3 +31,20 @@ MonoBehaviour:
     type: 0
     requiredAmount: 2
     amount: 0
+  rewards:
+  - type: 0
+    rewardID: 
+    amount: 2
+    rewardPool:
+    - {fileID: 11400000, guid: adb0342d4ebcf594382b3f2269c00615, type: 2}
+    - {fileID: 11400000, guid: 55a371673fd1ee2468b1bf0ba3bf6eba, type: 2}
+    - {fileID: 11400000, guid: 3b5e1a1d07300954fae59071b1dea36f, type: 2}
+    - {fileID: 11400000, guid: 07dbd676de917fc44a30b8c09f8286d0, type: 2}
+    - {fileID: 11400000, guid: 14129371c56fc334e8c258449eadaf26, type: 2}
+  - type: 3
+    rewardID: 
+    amount: 2
+    rewardPool:
+    - {fileID: 11400000, guid: d9652236fecbcbd40916565fdd79ce1e, type: 2}
+    - {fileID: 11400000, guid: c7f594ec1ccb0c0419fc18422c27e6d7, type: 2}
+    - {fileID: 11400000, guid: 81ceceb055a806541b609f44a0638d5b, type: 2}

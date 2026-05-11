@@ -10,6 +10,5 @@ public class CustomerSO : ScriptableObject
     public float failMulti;
     public bool isBoss;
     public QuestSO customerQuest;
-    public GameObject[] customerTips;
     public GameObject[] customerShits;
 }

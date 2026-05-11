@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef75feb825fea64982be76405a950d9, type: 3}
   m_Name: Pepperonipede Spawn
   m_EditorClassIdentifier: Assembly-CSharp::WeightedSpawnSO
-  enemy: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+  spawn: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
   MinWeight: 0.1
   MaxWeight: 0.15

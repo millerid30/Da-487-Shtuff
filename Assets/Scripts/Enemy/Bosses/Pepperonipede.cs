@@ -6,7 +6,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     public GameObject segmentPrefab;
     public int segments = 10;
     public bool isHead = false;
-    //public bool isTail = false;
+    public bool isTail = false;
 
     [Header("Movement")]
     [SerializeField] private float turnSpeed = 20f;
@@ -19,22 +19,30 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     public Transform follow;
     private GameObject seg;
 
+    public Transform childObject;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
+        difficulty = DifficultyController.Instance.difficulty;
         rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
         player = GameObject.FindGameObjectWithTag("Player");
+        quest = GameObject.FindAnyObjectByType<QuestController>();
         maxHealth = enemy.maxHealth * difficulty;
         health = maxHealth;
-
+        isStunned = false;
+        isDead = false;
+        numDrops = Mathf.RoundToInt(1 + enemy.enemyNumDrops * difficulty / 10);
         if (transform.parent != null)
         {
             follow = transform.parent.GetComponent<Pepperonipede>().GiveTail();
             transform.position = follow.position;
         }
-
-        UpdateSegment();
+        segments *= Mathf.RoundToInt(difficulty);
         CreateChildren(segments);
+        childObject = transform.GetChild(transform.childCount - 1);
+        UpdateSegment();
     }
 
     // Update is called once per frame
@@ -51,15 +59,10 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
 
         if (health <= 0)
         {
-            if (tail != null)
+            if (!isDead && childObject != null && childObject.GetComponent<Pepperonipede>() != null)
             {
-                for (int i = transform.childCount - 2; i >= 0; i--)
-                {
-                    Destroy(gameObject.transform.GetChild(i).gameObject);
-                }
-                Destroy(tail.gameObject);
+                childObject.parent = null;
             }
-            transform.DetachChildren();
             StartCoroutine(OnDeath());
         }
     }
@@ -67,6 +70,18 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     public void UpdateSegment()
     {
         isHead = (follow == null);
+        if (childObject == null)
+        {
+            isTail = true;
+        }
+        else if (childObject.GetComponent<Pepperonipede>() == null)
+        {
+            isTail = true;
+        }
+        else
+        {
+            isTail = false;
+        }
     }
     protected override void Move()
     {
@@ -128,11 +143,8 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         if (segments > 0)
         {
             segments--;
-            // instantiate segment as child of this segment
             seg = GameObject.Instantiate(segmentPrefab, transform);
             seg.transform.localPosition = Vector2.zero;
-            // set this segment as parent of instantiated child
-            //seg.transform.SetParent(transform);
             Pepperonipede newP = seg.GetComponentInChildren<Pepperonipede>();
             if (newP != null)
             {

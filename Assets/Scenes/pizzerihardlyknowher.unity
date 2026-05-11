@@ -362,15 +362,15 @@ RectTransform:
   m_GameObject: {fileID: 49109007}
   m_LocalRotation: {x: 0, y: 0, z: -0.061048605, w: 0.99813485}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1573344184}
   m_Father: {fileID: 963270538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: 200}
+  m_AnchoredPosition: {x: -750, y: 300}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &49109009
@@ -1491,8 +1491,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -650, y: -400}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: -700, y: -400}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &327324530
 MonoBehaviour:
@@ -3745,7 +3745,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1952795797808552625, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: isTail
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: segments
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: turnSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: tailSpeedMulti
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 5542403694226003420, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5546,6 +5562,7 @@ GameObject:
   - component: {fileID: 1865782266}
   - component: {fileID: 1865782267}
   - component: {fileID: 1865782268}
+  - component: {fileID: 1865782269}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5582,7 +5599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   inventoryPanel: {fileID: 903793597}
   slotPrefab: {fileID: 3789165553690544092, guid: 4fab351853303774799925307ae0fb0d, type: 3}
-  slotCount: 999
+  slotCount: 32
   itemPrefabs: []
 --- !u!114 &1865782265
 MonoBehaviour:
@@ -5688,6 +5705,19 @@ MonoBehaviour:
   ordersFailed: 0
   enemiesDefeated: 0
   wavesCompleted: 0
+--- !u!114 &1865782269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865782262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18d6dfa3b79c2d4a9d9773001ed183a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  spawnLocation: {fileID: 1865782263}
 --- !u!1 &1905896049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 348648620386285371, guid: c5fcc04224623cc49b78539ff97ffe1d, type: 3}

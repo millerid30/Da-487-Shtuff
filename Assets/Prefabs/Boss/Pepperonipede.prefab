@@ -333,6 +333,8 @@ MonoBehaviour:
   maxDistance: 10
   minDistance: 3
   decisionDelay: 2
+  kbResist: 0.75
+  stunResist: 0.5
   sillyCoefficient: 25
   spawnDelay: 0.125
   segmentPrefab: {fileID: 1952795797808552625}

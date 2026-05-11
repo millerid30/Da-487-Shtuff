@@ -19,19 +19,25 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     bool isWandering = true;
     //bool isStunned;
 
+    [Range(0.01f, 1.0f)]
+    [SerializeField] protected private float kbResist = 0.01f;
+    [Range(0.01f, 1.0f)]
+    [SerializeField] protected private float stunResist = 0.01f;
+
     [Header("Silly")]
     [Range(0f, 100f)]
     [SerializeField] protected private float sillyCoefficient = 50f;
     [Range(0f, 3f)]
     [SerializeField] protected private float spawnDelay = 0.125f;
 
+    protected private float[] Weights;
     protected private int numDrops = 1;
 
     protected private GameObject player;
     private GameObject prefab;
     protected private float distance;
     protected private QuestController quest;
-    private bool isDead;
+    protected private bool isDead;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
@@ -41,10 +47,10 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         rb.freezeRotation = true;
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
-        isStunned = false;
-        isDead = false;
         maxHealth = enemy.maxHealth * difficulty;
         health = maxHealth;
+        isStunned = false;
+        isDead = false;
         numDrops = Mathf.RoundToInt(1 + enemy.enemyNumDrops * difficulty / 10);
     }
 
@@ -175,16 +181,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
             {
                 Instantiate(enemy.enemyGiblets, transform.position, transform.rotation);
             }
-            if (enemy.enemyDrops != null)
-            {
-                for (int i = 0; i < numDrops; i++)
-                {
-                    int randD = Random.Range(0, enemy.enemyDrops.Length);
-                    Vector3 randL = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-                    prefab = Instantiate(enemy.enemyDrops[randD], transform.position + randL, transform.rotation);
-                    prefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f, 1f * 10f), Random.Range(-1f, 1f)) * sillyCoefficient / 10f);
-                }
-            }
+            EnemyItemSpawner();
             Destroy(gameObject, 3f);
             yield break;
         }
@@ -210,7 +207,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     public void Knockback(Vector2 direction, float force)
     {
         Vector2 dir = direction.normalized;
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
+        rb.AddForce(direction * force * (1 - kbResist), ForceMode2D.Impulse);
     }
 
     public IEnumerator Stun(float duration)
@@ -219,10 +216,49 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         {
             //movement = 0;
             isStunned = true;
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(duration * (1 - stunResist));
             // allow movement;
             isStunned = false;
             yield break;
+        }
+    }
+    public void EnemyItemSpawner()
+    {
+        Weights = new float[enemy.enemyDrops.Count];
+        for (int j = 0; j < numDrops; j++)
+        {
+            float value = Random.value;
+            ResetSpawnWeights();
+            for (int i = 0; i < Weights.Length; i++)
+            {
+                if (value < Weights[i])
+                {
+
+                    prefab = Instantiate(enemy.enemyDrops[i].spawn, transform.position, Quaternion.identity);
+                    Rigidbody2D prb = prefab.GetComponent<Rigidbody2D>();
+                    if (prb != null)
+                    {
+                        var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * 2;
+                        prb.AddForce(randForce, ForceMode2D.Impulse);
+                        prb.AddTorque(randForce.x, ForceMode2D.Impulse);
+                    }
+                    break;
+                }
+                value -= Weights[i];
+            }
+        }
+    }
+    void ResetSpawnWeights()
+    {
+        float totalWeight = 0;
+        for (int i = 0; i < Weights.Length; i++)
+        {
+            Weights[i] = enemy.enemyDrops[i].GetWeight();
+            totalWeight += Weights[i];
+        }
+        for (int i = 0; i < Weights.Length; i++)
+        {
+            Weights[i] /= totalWeight;
         }
     }
 }

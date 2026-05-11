@@ -146,7 +146,8 @@ public class WaveSpawner : MonoBehaviour
                     //  FIX
                     if (spawn != null)
                     {
-                        prefab = Instantiate(waves[nextWave].WeightedEnemies[i].enemy, spawn.position, spawn.rotation);
+                        prefab = Instantiate(waves[nextWave].WeightedEnemies[i].spawn, spawn.position, spawn.rotation);
+                        break;
                     }
                 }
                 value -= Weights[i];
@@ -161,7 +162,6 @@ public class WaveSpawner : MonoBehaviour
         {
             Enemy enemy = obj.GetComponent<Enemy>();
             if (enemy == null) { Debug.Log(id + " is null!"); return; }
-            Debug.Log("Spawning: " + id);
             if (id.Equals(enemy.enemy.enemyID))
             {
                 prefab = Instantiate(obj, spawn.position, spawn.rotation);

@@ -42,6 +42,7 @@ public class ArenaManager : MonoBehaviour
         ArchiveArena(arenaObject);
         prefab = Instantiate(arenaPool[Random.Range(0, arenaPool.Length)], transform);
         arenaObject = prefab;
+        RewardController.Instance.UpdateSpawn();
     }
     void ArchiveArena(GameObject arena)
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeightedSpawnSO", menuName = "Scriptable Objects/WeightedSpawnSO")]
 public class WeightedSpawnSO : ScriptableObject
 {
-    public GameObject enemy;
+    public GameObject spawn;
     [Range(0f, 1f)] public float MinWeight;
     [Range(0f, 1f)] public float MaxWeight;
 

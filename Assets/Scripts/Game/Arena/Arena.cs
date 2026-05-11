@@ -29,7 +29,7 @@ public class Arena : MonoBehaviour
     {
         if (isComplete && !isRemoving)
         {
-            StartCoroutine(RemoveArena(3));
+            StartCoroutine(RemoveArena(2));
         }
 
         if (Keyboard.current.homeKey.wasPressedThisFrame)

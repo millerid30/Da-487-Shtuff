@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef75feb825fea64982be76405a950d9, type: 3}
   m_Name: Nappler Spawn
   m_EditorClassIdentifier: Assembly-CSharp::WeightedSpawnSO
-  enemy: {fileID: 1031731082222593503, guid: c4d877117cad74d49ac9fa9a96dfc5e9, type: 3}
-  MinWeight: 0.2
-  MaxWeight: 0.25
+  spawn: {fileID: 1031731082222593503, guid: c4d877117cad74d49ac9fa9a96dfc5e9, type: 3}
+  MinWeight: 0.3
+  MaxWeight: 0.35

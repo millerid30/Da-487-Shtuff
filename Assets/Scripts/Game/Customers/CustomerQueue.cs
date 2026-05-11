@@ -24,7 +24,7 @@ public class CustomerQueue : MonoBehaviour
         {
             spawnpoint = transform.Find("Customer UI");
         }
-        RandomQueueCustomers(3);
+        RandomQueueCustomers(4);
     }
 
     // Update is called once per frame
@@ -42,9 +42,9 @@ public class CustomerQueue : MonoBehaviour
             }
             else
             {
-                RandomQueueCustomers(3);
+                RandomQueueCustomers(4);
             }
-            if (!bossQueued && DifficultyController.Instance.ordersCompleted % 5 == 0 && DifficultyController.Instance.ordersCompleted > 0)
+            if (!bossQueued && DifficultyController.Instance.ordersCompleted % 5 == 0)// && DifficultyController.Instance.ordersCompleted > 0)
             {
                 QueueBoss();
             }

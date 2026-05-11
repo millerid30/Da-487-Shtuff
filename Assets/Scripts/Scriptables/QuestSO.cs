@@ -9,6 +9,7 @@ public class QuestSO : ScriptableObject
     public string questName;
     public string description;
     public List<QuestObjective> objectives;
+    public List<QuestReward> rewards;
 
     private void OnValidate()
     {
@@ -64,3 +65,15 @@ public class QuestProgress
 
     public string QuestID => quest.questID;
 }
+[System.Serializable]
+public class QuestReward
+{
+    public RewardType type;
+    public string rewardID;
+    public int amount = 1;
+    public List<WeightedSpawnSO> rewardPool;
+}
+public enum RewardType
+{
+    Item, Gold, Other, FailEnemy, FailDifficulty
+};

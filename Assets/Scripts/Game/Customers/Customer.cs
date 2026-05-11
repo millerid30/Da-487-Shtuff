@@ -9,6 +9,7 @@ public class Customer : MonoBehaviour
     public string customerID;
     [TextArea]
     [SerializeField] private string customerDescription;
+    private QuestSO quest;
 
     public float waitTime;
     private bool isServed;
@@ -32,7 +33,7 @@ public class Customer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        QuestSO quest = customer.customerQuest;
+        quest = customer.customerQuest;
         if (quest != null)
         {
             GiveOrder(quest);
@@ -96,15 +97,8 @@ public class Customer : MonoBehaviour
     {
         if (!isServed)
         {
-            // Important stuff
             isServed = true;
-            // give tip or something
-            for (int i = 0; i < customer.rewardMulti; i++)
-            {
-                var randTip = Random.Range(0, customer.customerTips.Length);
-                GiveTip(customer.customerTips[randTip]);
-            }
-            // Color
+            RewardController.Instance.GiveQuestReward(quest);
             sprite.color = winColor;
             // Silly Shit
             SillySilly();
@@ -115,16 +109,8 @@ public class Customer : MonoBehaviour
     {
         if (!isServed)
         {
-            // Important stuff
             isServed = true;
-            // spawn enemy or something
-            for (int i = 0; i < customer.failMulti; i++)
-            {
-                var randTip = Random.Range(0, customer.customerShits.Length);
-                string id = customer.customerShits[randTip].GetComponent<Enemy>().enemy.enemyID;
-                if (id != null) { WaveSpawner.Instance.ManualSpawn(id); }
-            }
-            // Color
+            RewardController.Instance.GiveQuestFail(quest);
             sprite.color = endColor;
             // Silly Shit
             SillySilly();

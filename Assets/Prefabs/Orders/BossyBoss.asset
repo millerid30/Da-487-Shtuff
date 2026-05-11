@@ -21,3 +21,15 @@ MonoBehaviour:
     type: 2
     requiredAmount: 10
     amount: 0
+  rewards:
+  - type: 0
+    rewardID: 
+    amount: 3
+    rewardPool:
+    - {fileID: 11400000, guid: 528373a3b3ab9e34a9faa7425b9b2f6f, type: 2}
+    - {fileID: 11400000, guid: 674337e18e84130488014bb111361a5e, type: 2}
+    - {fileID: 11400000, guid: bd793a8f6cf74544c80532b15d50d652, type: 2}
+  - type: 4
+    rewardID: 
+    amount: 10
+    rewardPool: []
