@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Arena : MonoBehaviour
 {
@@ -30,11 +29,6 @@ public class Arena : MonoBehaviour
         if (isComplete && !isRemoving)
         {
             StartCoroutine(RemoveArena(2));
-        }
-
-        if (Keyboard.current.homeKey.wasPressedThisFrame)
-        {
-            IsComplete();
         }
     }
     public void IsComplete()

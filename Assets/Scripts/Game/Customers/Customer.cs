@@ -80,11 +80,11 @@ public class Customer : MonoBehaviour
             OrderComplete();
         }
         // TEST
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.homeKey.wasPressedThisFrame)
         {
             OrderComplete();
         }
-        if (Keyboard.current.vKey.wasPressedThisFrame)
+        if (Keyboard.current.endKey.wasPressedThisFrame)
         {
             OrderFailed();
         }

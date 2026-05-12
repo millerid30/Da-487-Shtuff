@@ -19,17 +19,17 @@ public interface IHitstop
 }
 public interface IEnemyAttack1
 {
-    public void EnemyAttack1();
+    public IEnumerator EnemyAttack1();
 }
 public interface IEnemyAttack2
 {
-    public void EnemyAttack2();
+    public IEnumerator EnemyAttack2();
 }
 public interface IEnemyAttack3
 {
-    public void EnemyAttack3();
+    public IEnumerator EnemyAttack3();
 }
 public interface IBossAttack1
 {
-    public void BossAttack1();
+    public IEnumerator BossAttack1();
 }

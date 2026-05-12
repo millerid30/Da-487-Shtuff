@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 0.6985, y: 0.593, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8722138051202467841}
   - {fileID: 8721746893026418371}
   - {fileID: 5451242867151101477}
   m_Father: {fileID: 0}
@@ -115,9 +116,12 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: 3d5a01fca9ac54c43adbd8b4892288d0, type: 2}
   isStunned: 0
   health: 0
+  aim: {fileID: 8722138051202467841}
   maxDistance: 5
   minDistance: 2
   decisionDelay: 2
+  kbResist: 0.01
+  stunResist: 0.01
   sillyCoefficient: 25
   spawnDelay: 0.01
 --- !u!1 &2130983928616614823
@@ -198,7 +202,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -143411491
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2453253288309886173, guid: 91b0d5b1732128246b338a7578a6dedb, type: 3}
@@ -280,3 +284,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0490361, y: 2.055717}
   m_Direction: 0
+--- !u!1 &5891775479276143684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8722138051202467841}
+  m_Layer: 7
+  m_Name: Aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8722138051202467841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5891775479276143684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2639515584406980336}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

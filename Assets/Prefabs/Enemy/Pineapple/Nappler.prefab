@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -143411491
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -6695093312418644491, guid: 3da641cdb2baa424097b204b3975ad93, type: 3}
@@ -123,6 +123,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6572450078563101738}
   - {fileID: 8814355776038455188}
   - {fileID: 1082744676358933741}
   m_Father: {fileID: 0}
@@ -219,11 +220,45 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: ef36bafca70099d4e8e10fc1c07b03ee, type: 2}
   isStunned: 0
   health: 0
+  aim: {fileID: 6572450078563101738}
   maxDistance: 4
   minDistance: 2
   decisionDelay: 4
+  kbResist: 0.01
+  stunResist: 0.01
   sillyCoefficient: 25
   spawnDelay: 0.01
+--- !u!1 &2998984437258869332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6572450078563101738}
+  m_Layer: 7
+  m_Name: Aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6572450078563101738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2998984437258869332}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6985, y: 0.593, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 88619207811904534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6726778436612341377
 GameObject:
   m_ObjectHideFlags: 0

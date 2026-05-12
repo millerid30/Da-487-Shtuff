@@ -19,7 +19,7 @@ MonoBehaviour:
   - objectiveID: oliver0
     description: i love olives!
     type: 0
-    requiredAmount: 3
+    requiredAmount: 2
     amount: 0
   - objectiveID: shroomer0
     description: much room for mushrooms!
@@ -29,7 +29,7 @@ MonoBehaviour:
   - objectiveID: nappler0
     description: pineapple please!
     type: 0
-    requiredAmount: 2
+    requiredAmount: 1
     amount: 0
   rewards:
   - type: 0

@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &40325905493019083
 Transform:
   m_ObjectHideFlags: 0
@@ -330,9 +330,9 @@ MonoBehaviour:
   enemy: {fileID: 11400000, guid: 3fe9f1767363f454593451511635c60b, type: 2}
   isStunned: 0
   health: 0
-  maxDistance: 10
-  minDistance: 3
-  decisionDelay: 2
+  maxDistance: 15
+  minDistance: 4
+  decisionDelay: 5
   kbResist: 0.75
   stunResist: 0.5
   sillyCoefficient: 25
@@ -340,11 +340,19 @@ MonoBehaviour:
   segmentPrefab: {fileID: 1952795797808552625}
   segments: 10
   isHead: 0
+  isTail: 0
   turnSpeed: 1
-  tailSpeedMulti: 0.95
+  tailSpeedMulti: 0.975
+  attackPoint: {x: 0, y: 0, z: 0}
+  angleSpeed: 0
+  radiusSpeed: 0
+  circleRadius: 0
+  circleAngle: 0
+  chargeForce: 15
   aim: {fileID: 8223210765488868385}
   tail: {fileID: 2437241002849599034}
   follow: {fileID: 0}
+  childObject: {fileID: 0}
 --- !u!1 &4456136397274802639
 GameObject:
   m_ObjectHideFlags: 0

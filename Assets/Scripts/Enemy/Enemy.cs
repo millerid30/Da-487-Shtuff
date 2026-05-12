@@ -12,12 +12,15 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     protected private float maxHealth = 1;
 
     [Header("Distance")]
+    [SerializeField] protected private Transform aim;
     [SerializeField] protected private float maxDistance = 7f;
     [SerializeField] protected private float minDistance = 2f;
-    [SerializeField] protected private float decisionDelay = 2f;
+    [SerializeField] protected private float decisionDelay = 3f;
     float wanderTimer = 0f;
     bool isWandering = true;
-    //bool isStunned;
+    //protected bool isStunned;
+    protected float attackTimer = 0f;
+    protected bool isAttacking = false;
 
     [Range(0.01f, 1.0f)]
     [SerializeField] protected private float kbResist = 0.01f;
@@ -58,6 +61,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     protected virtual void FixedUpdate()
     {
         WanderTimer();
+        AttackTimer();
         if (!isStunned)
         {
             if (player != null && health > 0)
@@ -99,6 +103,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         else
         {
             transform.position = Vector2.Lerp(transform.position, player.transform.position, enemy.moveSpeed * Time.deltaTime / 6);
+            StartCoroutine(EnemyAttack1());
         }
     }
     void WanderTimer()
@@ -117,23 +122,46 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     {
         if (!isWandering)
         {
+            isWandering = true;
             float angle = Random.Range(0f, 360f);
             rb.linearVelocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized * enemy.moveSpeed * 50 * Time.deltaTime;
-            isWandering = true;
         }
     }
+    protected virtual void AttackTimer()
+    {
+        if (isAttacking)
+        {
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= decisionDelay)
+            {
+                attackTimer = 0;
+                isAttacking = false;
+            }
+        }
+    }
+    public IEnumerator EnemyAttack1()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
 
-    public void EnemyAttack1()
-    {
-        Debug.Log("Implement Attack");
+            yield return new WaitForSeconds(1);
+            Vector2 dir = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            aim.transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            rb.AddForce(aim.transform.up * enemy.moveSpeed, ForceMode2D.Impulse);
+        }
+        yield break;
     }
-    public void EnemyAttack2()
+    public IEnumerator EnemyAttack2()
     {
         Debug.Log("Implement Attack");
+        yield break;
     }
-    public void EnemyAttack3()
+    public IEnumerator EnemyAttack3()
     {
         Debug.Log("Implement Attack");
+        yield break;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -170,8 +198,8 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     {
         if (!isDead)
         {
-            SendDeathMessage();
             isDead = true;
+            SendDeathMessage();
             rb.freezeRotation = false;
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;
             rb.AddForce(randForce, ForceMode2D.Impulse);

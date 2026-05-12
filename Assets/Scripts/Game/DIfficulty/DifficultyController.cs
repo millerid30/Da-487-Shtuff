@@ -35,12 +35,12 @@ public class DifficultyController : MonoBehaviour
                 timer = maxTimer;
             }
         }
-        if (Keyboard.current.tKey.wasPressedThisFrame)
+        if (Keyboard.current.pageUpKey.wasPressedThisFrame)
         {
             SetTimeScale();
             timer = maxTimer;
         }
-        if (Keyboard.current.pKey.wasPressedThisFrame)
+        if (Keyboard.current.pageDownKey.wasPressedThisFrame)
         {
             PauseDifficultyClock(!isPaused);
         }

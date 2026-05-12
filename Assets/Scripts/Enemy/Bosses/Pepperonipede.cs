@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, IEnemyAttack3, IBossAttack1
@@ -14,19 +15,35 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     [SerializeField] private float tailSpeedMulti = 0.95f;
     private float timer;
 
-    public Transform aim;
+    [Header("Attack")]
+    [SerializeField] private Vector3 attackPoint;
+    [SerializeField] private float angleSpeed;
+    [SerializeField] private float radiusSpeed;
+    [SerializeField] private float circleRadius;
+    [SerializeField] private float circleAngle = 0f;
+    [Range(1f, 50f)]
+    [SerializeField] private float chargeForce = 15f;
+
+    [Header("Transforms")]
     public Transform tail;
     public Transform follow;
     private GameObject seg;
 
     public Transform childObject;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         difficulty = DifficultyController.Instance.difficulty;
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        if (segments % 2 == 0)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
         maxHealth = enemy.maxHealth * difficulty;
@@ -43,12 +60,18 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         CreateChildren(segments);
         childObject = transform.GetChild(transform.childCount - 1);
         UpdateSegment();
+
+        attackPoint = transform.position;
+        angleSpeed = turnSpeed * 5;
+        radiusSpeed = enemy.moveSpeed * 2;
+        circleRadius = minDistance;
     }
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         timer += Time.deltaTime;
+        AttackTimer();
         UpdateSegment();
 
         if (player != null && health > 0)
@@ -69,7 +92,14 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
 
     public void UpdateSegment()
     {
-        isHead = (follow == null);
+        if (follow == null)
+        {
+            if (!isHead)
+            {
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                isHead = true;
+            }
+        }
         if (childObject == null)
         {
             isTail = true;
@@ -78,9 +108,9 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         {
             isTail = true;
         }
-        else
+        if (!isHead)
         {
-            isTail = false;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
         }
     }
     protected override void Move()
@@ -88,20 +118,37 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         Vector2 direction = player.transform.position - transform.position;
         if (isHead)
         {
-            Turn();
-            if (distance > minDistance)
+            if (!isAttacking)
             {
-                rb.AddForce(aim.transform.up * enemy.moveSpeed * Time.deltaTime * 50);
-            }
-            //else if (distance < minDistance)
-            //{
-            //    transform.position = Vector2.Lerp(transform.position, -direction.normalized * enemy.moveSpeed * 100, enemy.moveSpeed * Time.deltaTime);
-            //}
-            else
-            {
-                // circle script
-                // Circle();
-                rb.AddForce(aim.transform.up * enemy.moveSpeed * Time.deltaTime * 25);
+                Turn();
+                if (distance > maxDistance && attackTimer <= 0)
+                {
+                    StartCoroutine(ChargeAttack(chargeForce));
+                }
+                else if (distance > minDistance)
+                {
+                    rb.AddForce(aim.transform.up * enemy.moveSpeed * Time.deltaTime * 50);
+                }
+                else
+                {
+                    float value = Random.value;
+                    if (value <= 0.45f)
+                    {
+                        StartCoroutine(CircleAttack());
+                    }
+                    else if (value <= 0.90f)
+                    {
+                        StartCoroutine(ChargeAttack(chargeForce / 3));
+                    }
+                    else
+                    {
+                        // Do Attack 3
+                        if (!isAttacking)
+                        {
+                            isAttacking = true;
+                        }
+                    }
+                }
             }
         }
         else
@@ -119,19 +166,53 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     }
     void Follow()
     {
-        aim.transform.rotation = Quaternion.Slerp(aim.transform.rotation, follow.rotation, Time.deltaTime * turnSpeed * tailSpeedMulti);
+        aim.transform.rotation = Quaternion.Slerp(aim.transform.rotation, follow.rotation, Time.deltaTime * turnSpeed * tailSpeedMulti * 2.5f);
     }
-    void CircleTimer()
+    IEnumerator ChargeAttack(float force)
     {
+        if (!isAttacking)
+        {
+            isAttacking = true;
 
+            attackPoint = player.transform.position;
+            Vector2 dir = attackPoint - transform.position;
+            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            aim.transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            yield return new WaitForSeconds(1);
+            rb.AddForce(aim.transform.up * force, ForceMode2D.Impulse);
+        }
+        yield break;
     }
-    void Circle()
+    IEnumerator CircleAttack()
     {
-        // circle around player
-    }
-    public void BossAttack1()
-    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            yield return new WaitForSeconds(1);
+            attackPoint = player.transform.position;
+            circleAngle = Mathf.Atan2(attackPoint.y - transform.position.y, attackPoint.x - transform.position.x) * Mathf.Rad2Deg;
 
+            while (circleRadius > 0)
+            {
+                isAttacking = true;
+                circleAngle += angleSpeed * Time.deltaTime;
+                circleRadius -= radiusSpeed * Time.deltaTime;
+
+                float x = attackPoint.x + Mathf.Cos(circleAngle) * circleRadius;
+                float y = attackPoint.y + Mathf.Sin(circleAngle) * circleRadius;
+                Vector3 dir = Vector3.Cross(transform.position - attackPoint, Vector3.back);
+                float ang = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+                aim.transform.rotation = Quaternion.Euler(0, 0, -ang);
+                transform.position = new Vector2(x, y);
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            circleRadius = minDistance;
+        }
+        yield break;
+    }
+    public IEnumerator BossAttack1()
+    {
+        yield break;
     }
 
     public void SetSegments(int segments)

@@ -133,7 +133,6 @@ public class WaveSpawner : MonoBehaviour
     }
     void SpawnEnemies(List<WeightedSpawnSO> enemies)
     {
-        Debug.Log("Spawning enemies...");
         // Spawn enemies weighted by threat level
         for (int j = 0; j < DifficultyController.Instance.difficulty; j++)
         {
