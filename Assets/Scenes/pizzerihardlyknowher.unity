@@ -3932,8 +3932,12 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
-      propertyPath: decisionDelay
+      propertyPath: minDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
+      propertyPath: decisionDelay
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3708616198985125548, guid: 0fca207c8452b604b84dabbf7a99de76, type: 3}
       propertyPath: tailSpeedMulti

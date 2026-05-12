@@ -16,6 +16,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     private float timer;
 
     [Header("Attack")]
+    // Maybe add AttackCooldown separate from AttackTimer so movement doesnt stop for so long
     [SerializeField] private Vector3 attackPoint;
     [SerializeField] private float angleSpeed;
     [SerializeField] private float radiusSpeed;
@@ -97,6 +98,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             if (!isHead)
             {
                 rb.bodyType = RigidbodyType2D.Dynamic;
+                rb.constraints = ~RigidbodyConstraints2D.FreezePosition;
                 isHead = true;
             }
         }
@@ -190,17 +192,28 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             isAttacking = true;
             yield return new WaitForSeconds(1);
             attackPoint = player.transform.position;
-            circleAngle = Mathf.Atan2(attackPoint.y - transform.position.y, attackPoint.x - transform.position.x) * Mathf.Rad2Deg;
+            circleAngle = Mathf.Atan2(transform.position.y - attackPoint.y, transform.position.x - attackPoint.x);
+            float value = Random.value;
 
             while (circleRadius > 0)
             {
                 isAttacking = true;
-                circleAngle += angleSpeed * Time.deltaTime;
+                Vector3 dir = Vector3.one;
                 circleRadius -= radiusSpeed * Time.deltaTime;
+                if (value <= 0.5)
+                {
+                    circleAngle += angleSpeed * Time.deltaTime;
+                    dir = Vector3.Cross(transform.position - attackPoint, Vector3.back);
+                }
+                else
+                {
+                    circleAngle -= angleSpeed * Time.deltaTime;
+                    dir = Vector3.Cross(transform.position - attackPoint, Vector3.forward);
+                }
 
                 float x = attackPoint.x + Mathf.Cos(circleAngle) * circleRadius;
                 float y = attackPoint.y + Mathf.Sin(circleAngle) * circleRadius;
-                Vector3 dir = Vector3.Cross(transform.position - attackPoint, Vector3.back);
+
                 float ang = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
                 aim.transform.rotation = Quaternion.Euler(0, 0, -ang);
                 transform.position = new Vector2(x, y);
