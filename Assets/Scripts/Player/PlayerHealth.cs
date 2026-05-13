@@ -38,11 +38,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         // TEST damage/heal
         if (Keyboard.current.deleteKey.wasPressedThisFrame)
         {
-            Damage(maxHealth/5);
+            Damage(maxHealth / 5);
         }
         if (Keyboard.current.insertKey.wasPressedThisFrame)
         {
-            Heal(maxHealth/5);
+            Heal(maxHealth / 5);
         }
     }
 

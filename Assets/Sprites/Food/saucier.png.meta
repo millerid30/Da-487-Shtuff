@@ -154,99 +154,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 940
-        width: 179
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 384fb7cf19becf500800000000000000
-      internalID: 431478676559492227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_1
-      rect:
-        serializedVersion: 2
-        x: 358
-        y: 929
-        width: 101
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2dafbd6350f093a00800000000000000
-      internalID: 736636529121426130
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_2
-      rect:
-        serializedVersion: 2
-        x: 468
-        y: 940
-        width: 253
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: edf6fa24775b638c0800000000000000
-      internalID: -4019826093557059618
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_3
-      rect:
-        serializedVersion: 2
-        x: 901
-        y: 929
-        width: 79
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7665da03835c86700800000000000000
-      internalID: 533893400968910439
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_4
-      rect:
-        serializedVersion: 2
-        x: 0
         y: 130
         width: 980
         height: 700
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -259,99 +171,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: saucier_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 6
-        width: 183
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1d7669b9b4fadfb60800000000000000
-      internalID: 7781568470433818577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_6
-      rect:
-        serializedVersion: 2
-        x: 358
-        y: 0
-        width: 101
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: afc419fb316a84b30800000000000000
-      internalID: 4271846850309475578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_7
-      rect:
-        serializedVersion: 2
-        x: 461
-        y: 6
-        width: 265
-        height: 68
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0eb037d91a4634ac0800000000000000
-      internalID: -3872140609314419744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: saucier_8
-      rect:
-        serializedVersion: 2
-        x: 901
-        y: 0
-        width: 79
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0767009fa8f136580800000000000000
-      internalID: -8835183362227276176
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5d8b50934209c284eac65f3a795cb0e7
     internalID: 0
     vertices: []
     indices: 
@@ -361,11 +185,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      saucier_0: 431478676559492227
+      saucier_0: -2071132900263827063
       saucier_1: 736636529121426130
       saucier_2: -4019826093557059618
       saucier_3: 533893400968910439
-      saucier_4: -2071132900263827063
       saucier_5: 7781568470433818577
       saucier_6: 4271846850309475578
       saucier_7: -3872140609314419744

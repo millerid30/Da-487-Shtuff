@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -88,13 +87,11 @@ public class WaveSpawner : MonoBehaviour
     void WaveCompleted()
     {
         DifficultyController.Instance.wavesCompleted++;
-        Debug.Log("Wave Complete!");
         state = SpawnState.counting;
         waveCountdown = timeBetweenWaves;
         if (nextWave + 1 > waves.Length - 1)
         {
             nextWave = 0;
-            Debug.Log("All Waves Complete! Looping...");
         }
         nextWave++;
     }
@@ -113,9 +110,7 @@ public class WaveSpawner : MonoBehaviour
     }
     IEnumerator SpawnWave(Wave wave)
     {
-        Debug.Log("Spawning Wave: " + wave.name);
         state = SpawnState.spawning;
-        //ResetSpawnWeights();
 
         // Difficulty Scaling
         //float num = wave.count * DifficultyController.Instance.difficulty;
@@ -133,7 +128,6 @@ public class WaveSpawner : MonoBehaviour
     }
     void SpawnEnemies(List<WeightedSpawnSO> enemies)
     {
-        // Spawn enemies weighted by threat level
         for (int j = 0; j < DifficultyController.Instance.difficulty; j++)
         {
             Transform spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -142,7 +136,6 @@ public class WaveSpawner : MonoBehaviour
             {
                 if (value < Weights[i])
                 {
-                    //  FIX
                     if (spawn != null)
                     {
                         prefab = Instantiate(waves[nextWave].WeightedEnemies[i].spawn, spawn.position, spawn.rotation);

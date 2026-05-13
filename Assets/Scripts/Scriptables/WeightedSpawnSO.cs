@@ -9,6 +9,6 @@ public class WeightedSpawnSO : ScriptableObject
 
     public float GetWeight()
     {
-        return Random.Range(MinWeight,MaxWeight);
+        return Random.Range(MinWeight, MaxWeight);
     }
 }

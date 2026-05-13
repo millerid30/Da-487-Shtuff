@@ -82,7 +82,10 @@ public class PlayerAttack : MonoBehaviour
             {
                 atkTimer = 0;
                 isAttacking = false;
-                Melee[select].SetActive(false);
+                foreach (GameObject m in Melee)
+                {
+                    m.SetActive(false);
+                }
             }
         }
     }

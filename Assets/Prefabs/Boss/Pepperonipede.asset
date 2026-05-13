@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyID: pepperonipede0
   enemyName: Pepperonipede
   maxHealth: 100
-  moveSpeed: 1
+  moveSpeed: 3
   power: 20
   threatLevel: 5
   enemyDrops:

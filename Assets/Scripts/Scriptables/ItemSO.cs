@@ -5,7 +5,7 @@ public class ItemSO : ScriptableObject
 {
     public string itemName;
     public float health, speed, power, atkSpeed, sauce;
-    
+
     public void EquipItem()
     {
         PlayerStats playerStats = GameObject.Find("StatManager").GetComponent<PlayerStats>();

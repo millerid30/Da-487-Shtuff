@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Net;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -102,7 +101,7 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
         {
             // Roll
             StartCoroutine(GetComponent<PlayerHealth>().IFrames(rollIframes));
-            rb.AddForce(-Aim.up * rollForce * (1 + Mathf.Log(moveSpeed,30)), ForceMode2D.Impulse);
+            rb.AddForce(-Aim.up * rollForce * (1 + Mathf.Log(moveSpeed, 30)), ForceMode2D.Impulse);
             isRolling = true;
         }
     }

@@ -153,12 +153,12 @@ TextureImporter:
       name: customer3_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 1454
-        width: 248
-        height: 247
+        x: 0
+        y: 0
+        width: 1200
+        height: 1708
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -171,187 +171,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: customer3_1
-      rect:
-        serializedVersion: 2
-        x: 460
-        y: 1573
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a8391efba231bbc80800000000000000
-      internalID: -8306024013425962102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_2
-      rect:
-        serializedVersion: 2
-        x: 485
-        y: 1598
-        width: 35
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 98f3928a5e3cd58b0800000000000000
-      internalID: -5161754206760517751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_3
-      rect:
-        serializedVersion: 2
-        x: 607
-        y: 1454
-        width: 248
-        height: 247
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 38978c618d17a4240800000000000000
-      internalID: 4776755527688944003
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_4
-      rect:
-        serializedVersion: 2
-        x: 1061
-        y: 1573
-        width: 36
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a54c34d2d55592ec0800000000000000
-      internalID: -3591245369171524518
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_5
-      rect:
-        serializedVersion: 2
-        x: 1086
-        y: 1598
-        width: 35
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fec3b982ddd6feda0800000000000000
-      internalID: -5913386989077709585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_6
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 0
-        width: 1182
-        height: 1577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 801bd5b6c71c917d0800000000000000
-      internalID: -2947111741015871224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_7
-      rect:
-        serializedVersion: 2
-        x: 446
-        y: 1553
-        width: 23
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a097f3090ca50fce0800000000000000
-      internalID: -1373498103247701750
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: customer3_8
-      rect:
-        serializedVersion: 2
-        x: 1047
-        y: 1553
-        width: 23
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b337fb9dd367824e0800000000000000
-      internalID: -2006223625975270597
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d7b1ee8c05c75c947b7bc256431addd2
     internalID: 0
     vertices: []
     indices: 

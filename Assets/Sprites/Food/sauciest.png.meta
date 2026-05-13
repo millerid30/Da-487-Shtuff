@@ -129,12 +129,12 @@ TextureImporter:
       name: sauciest_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 0
-        width: 388
-        height: 316
+        x: 32
+        y: 82
+        width: 306
+        height: 234
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cd95df13222da7848bf2e6ba34086f99
     internalID: 0
     vertices: []
     indices: 
