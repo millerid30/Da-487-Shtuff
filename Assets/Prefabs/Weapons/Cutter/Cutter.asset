@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a516ce96a6f5ea64b88832877b285d7b, type: 3}
-  m_Name: Ladler
+  m_Name: Cutter
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
-  weaponName: Ladler
+  weaponName: Cutter
   powerMulti: 0.5
-  atkSpeedMulti: 1
-  sauceMulti: 2
-  sauceProjectile: {fileID: 3984632689256496675, guid: 023f3456e5e72a44e8f7a714c859b57e, type: 3}
+  atkSpeedMulti: 2
+  sauceMulti: 1.2
+  comboMulti: 1
+  finisherMulti: 1.5
+  comboLength: 5
+  sauceProjectile: {fileID: 0}

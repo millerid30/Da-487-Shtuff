@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         hpBar.fillAmount = health / maxHealth;
     }
-    IEnumerator IFrames(float seconds)
+    public IEnumerator IFrames(float seconds)
     {
         // Ignore enemy layer
         int layer = gameObject.layer;

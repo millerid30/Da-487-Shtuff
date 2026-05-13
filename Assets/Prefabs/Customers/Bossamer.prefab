@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5712690960330294901, guid: cb9b5459de8dce44fb3257c48724c5f2, type: 3}
+  m_Sprite: {fileID: 2964931227164654459, guid: 219d6cac86ec86c4d9759c605e4e1a69, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -129,6 +129,9 @@ MonoBehaviour:
   customerID: bossyBest0
   customerDescription: make my day or yelp WILL be hearing about this place!
   waitTime: 0
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 0, b: 0, a: 1}
+  winColor: {r: 0, g: 1, b: 0, a: 1}
   launchForce: 1200
   spinForce: 50
   killTime: 3

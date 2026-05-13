@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,18 +11,28 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
     private Vector2 worldPosition;
     private Vector2 direction;
 
-    private InputAction playerControls;
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float drag = 1.0f;
 
+    [Header("Resistances")]
     [Range(0.01f, 1.0f)]
     [SerializeField] private float kbResist = 0.01f;
     [Range(0.01f, 1.0f)]
     [SerializeField] private float stunResist = 0.01f;
     [SerializeField] private bool isStunned;
+    // Damage Resist?
+
+    [Header("Dodge")]
+    [SerializeField] private float rollIframes = 0.3f;
+    [SerializeField] private float rollForce = 10f;
+    [SerializeField] private float rollDuration = 0.5f;
+    [SerializeField] private float rollTimer = 0f;
+
 
     [SerializeField] private Transform Aim;
     bool isMoving = false;
+    bool isRolling = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +44,7 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
     // Update is called once per frame
     void FixedUpdate()
     {
+        DodgeTimer();
         if (moveInput == Vector2.zero)
         {
             isMoving = false;
@@ -43,7 +55,7 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
             isMoving = true;
             rb.linearDamping = drag / 4;
         }
-        rb.AddForce(moveInput.normalized * moveSpeed * Time.deltaTime * 150);
+        rb.AddForce(moveInput.normalized * (moveSpeed) * Time.deltaTime * 120);
 
         if (lookInput != Vector2.zero)
         {
@@ -82,6 +94,29 @@ public class PlayerMovement : MonoBehaviour, IBumpable, IStunnable
         if (!isStunned)
         {
             moveInput = context.ReadValue<Vector2>();
+        }
+    }
+    public void Dodge(InputAction.CallbackContext context)
+    {
+        if (!isRolling)
+        {
+            // Roll
+            StartCoroutine(GetComponent<PlayerHealth>().IFrames(rollIframes));
+            rb.AddForce(-Aim.up * rollForce * (1 + Mathf.Log(moveSpeed,30)), ForceMode2D.Impulse);
+            isRolling = true;
+        }
+    }
+    void DodgeTimer()
+    {
+        if (isRolling)
+        {
+            rollTimer += Time.deltaTime * (1 + Mathf.Log(moveSpeed, 30));
+
+            if (rollTimer >= rollDuration)
+            {
+                rollTimer = 0;
+                isRolling = false;
+            }
         }
     }
     public void Look(InputAction.CallbackContext context)

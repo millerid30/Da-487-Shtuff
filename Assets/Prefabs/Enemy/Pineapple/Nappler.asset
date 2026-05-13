@@ -16,7 +16,7 @@ MonoBehaviour:
   enemyName: Nappler
   maxHealth: 50
   moveSpeed: 1.5
-  power: 20
+  power: 15
   threatLevel: 3
   enemyDrops:
   - {fileID: 11400000, guid: adb0342d4ebcf594382b3f2269c00615, type: 2}

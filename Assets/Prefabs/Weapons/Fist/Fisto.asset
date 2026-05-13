@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a516ce96a6f5ea64b88832877b285d7b, type: 3}
-  m_Name: Roller
+  m_Name: Fisto
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
-  weaponName: Roller
-  powerMulti: 1.5
-  atkSpeedMulti: 0.75
+  weaponName: Fisto
+  powerMulti: 1
+  atkSpeedMulti: 1
   sauceMulti: 1
+  startComboMulti: 1
+  comboMulti: 1
+  finisherMulti: 2
+  comboLength: 3
   sauceProjectile: {fileID: 0}

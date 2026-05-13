@@ -9,9 +9,10 @@ public class PlayerAttack : MonoBehaviour
     public bool isAttacking = false;
     [SerializeField] private float atkDuration = 0.3f;
     [SerializeField] private float atkTimer = 0f;
+    [SerializeField] private float comboDuration = 0.75f;
+    [SerializeField] private float comboTimer = 0f;
+    [SerializeField] private int comboCounter = 0;
     private int select = 0;
-
-    [SerializeField] private InputActionReference attack;
 
     private void Awake()
     {
@@ -19,34 +20,41 @@ public class PlayerAttack : MonoBehaviour
         foreach (GameObject m in Melee)
         {
             SetDamageTypes();
+            foreach (Transform c in m.transform)
+            {
+                c.gameObject.SetActive(false);
+            }
             m.SetActive(false);
         }
-    }
-
-    private void OnEnable()
-    {
-        attack.action.performed += Attack;
-    }
-    private void OnDisable()
-    {
-        attack.action.performed -= Attack;
     }
 
     void Update()
     {
         MeleeTimer();
-
+        ComboTimer();
     }
-    void Attack(InputAction.CallbackContext context)
+    public void Attack(InputAction.CallbackContext context)
     {
         if (!isAttacking)
         {
             Melee[select].SetActive(true);
-            if (Melee[select].GetComponent<Weapon>() != null && Melee[select].GetComponent<Weapon>().weaponType == WeaponType.Sauce)
+
+            for (int i = 0; i < Melee[select].transform.childCount; i++)
+            {
+                Melee[select].transform.GetChild(i).gameObject.SetActive(i == comboCounter);
+            }
+
+            if (Melee[select].GetComponent<Weapon>().weaponType == WeaponType.Sauce)
             {
                 Melee[select].GetComponent<Weapon>().SauceItUp();
             }
             isAttacking = true;
+            comboTimer = 0f;
+            comboCounter++;
+            if (comboCounter >= Melee[select].GetComponent<Weapon>().weapon.comboLength)
+            {
+                comboCounter = 0;
+            }
         }
     }
 
@@ -56,7 +64,15 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Melee[select].GetComponent<Weapon>() != null)
             {
+                //if (Melee[select].GetComponent<Weapon>().weapon.comboLength - 1 == comboCounter)
+                //{
+                //    atkTimer += (Time.deltaTime * Melee[select].GetComponent<Weapon>().weapon.atkSpeedMulti) / (0.5f * Melee[select].GetComponent<Weapon>().weapon.finisherMulti);
+                //}
+                //else
+                //{
                 atkTimer += Time.deltaTime * Melee[select].GetComponent<Weapon>().weapon.atkSpeedMulti;
+                //}
+
             }
             else
             {
@@ -68,6 +84,15 @@ public class PlayerAttack : MonoBehaviour
                 isAttacking = false;
                 Melee[select].SetActive(false);
             }
+        }
+    }
+    void ComboTimer()
+    {
+        comboTimer += Time.deltaTime;
+        if (comboTimer >= comboDuration)
+        {
+            comboTimer = 0;
+            comboCounter = 0;
         }
     }
     public void PrevWeapon(InputAction.CallbackContext context)

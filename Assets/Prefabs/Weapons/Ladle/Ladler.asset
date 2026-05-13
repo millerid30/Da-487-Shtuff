@@ -10,9 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a516ce96a6f5ea64b88832877b285d7b, type: 3}
-  m_Name: Fisto
+  m_Name: Ladler
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
-  weaponName: Fisto
-  powerMulti: 1
+  weaponName: Ladler
+  powerMulti: 0.5
   atkSpeedMulti: 1
-  sauceMulti: 1
+  sauceMulti: 2
+  startComboMulti: 1
+  comboMulti: 1
+  finisherMulti: 3
+  comboLength: 3
+  sauceProjectile: {fileID: 3984632689256496675, guid: 023f3456e5e72a44e8f7a714c859b57e, type: 3}

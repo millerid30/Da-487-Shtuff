@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 600}
+  m_SizeDelta: {x: 225, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8072026756293474550
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1232253937331310610, guid: 1a3c406b384717d48b35da4b2ff87636, type: 3}
+  m_Sprite: {fileID: -1683092687593934691, guid: ad920bf7a2b920b44bcb5ba77cf3a30c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -129,6 +129,9 @@ MonoBehaviour:
   customerID: johnnyTest0
   customerDescription: we are Johnny Test, we testing the code
   waitTime: 0
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 0, b: 0, a: 1}
+  winColor: {r: 0, g: 1, b: 0, a: 1}
   launchForce: 1200
   spinForce: 20
   killTime: 3

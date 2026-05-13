@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4471385368565907168}
   m_Layer: 0
-  m_Name: Sauce Orb
+  m_Name: Sauce Orb Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

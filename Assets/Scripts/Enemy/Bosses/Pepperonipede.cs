@@ -36,7 +36,6 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
     {
         difficulty = DifficultyController.Instance.difficulty;
         rb = GetComponent<Rigidbody2D>();
-        rb.freezeRotation = true;
         if (segments % 2 == 0)
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
@@ -45,6 +44,8 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
         }
+        rb.freezeRotation = true;
+        Physics2D.IgnoreLayerCollision(9, 6, false);
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
         maxHealth = enemy.maxHealth * difficulty;
@@ -87,6 +88,7 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
             {
                 childObject.parent = null;
             }
+            Physics2D.IgnoreLayerCollision(9, 6, true);
             StartCoroutine(OnDeath());
         }
     }
@@ -113,6 +115,10 @@ public class Pepperonipede : Enemy, IDamageable, IEnemyAttack1, IEnemyAttack2, I
         if (!isHead)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+        if (!isDead)
+        {
+            rb.freezeRotation = true;
         }
     }
     protected override void Move()

@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         difficulty = DifficultyController.Instance.difficulty;
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        Physics2D.IgnoreLayerCollision(7, 6, false);
         player = GameObject.FindGameObjectWithTag("Player");
         quest = GameObject.FindAnyObjectByType<QuestController>();
         maxHealth = enemy.maxHealth * difficulty;
@@ -86,6 +87,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
     public void Damage(float damage)
     {
         health -= damage;
+        //Hitstop.Instance.Stop(0.1f);
     }
     public void Heal(float heal)
     {
@@ -199,6 +201,7 @@ public class Enemy : MonoBehaviour, IDamageable, IBumpable, IStunnable, IEnemyAt
         if (!isDead)
         {
             isDead = true;
+            Physics2D.IgnoreLayerCollision(7, 6, true);
             SendDeathMessage();
             rb.freezeRotation = false;
             var randForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)) * sillyCoefficient;

@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -129,12 +129,12 @@ TextureImporter:
       name: feetser_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 659
-        height: 369
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 111
+        y: 64
+        width: 148
+        height: 305
+      alignment: 9
+      pivot: {x: 0.57458466, y: 0.84382296}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,11 +147,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: feetser_1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 65
+        width: 151
+        height: 304
+      alignment: 9
+      pivot: {x: 0.48375475, y: 0.8409193}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf813b31697b46549ac7d1e58d707035
+      internalID: -1346756441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4b839362fe1a1154d89c73d0b642ca10
     internalID: 0
     vertices: []
     indices: 
@@ -159,9 +181,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       feetser_0: 8023214664777979790
+      feetser_1: -1346756441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
